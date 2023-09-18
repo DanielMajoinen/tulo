@@ -1,7 +1,7 @@
-import { initTRPC, TRPCError } from "@trpc/server"
-import { Context } from "../trpc/context"
-import superjson from "superjson"
-import { ZodError } from "zod"
+import { initTRPC } from '@trpc/server'
+import { Context } from '../trpc/context'
+import superjson from 'superjson'
+import { ZodError } from 'zod'
 
 /**
  * Initialization of tRPC backend
@@ -15,13 +15,10 @@ const t = initTRPC.context<Context>().create({
       ...shape,
       data: {
         ...shape.data,
-        zodError:
-          error.code === "BAD_REQUEST" && error.cause instanceof ZodError
-            ? error.cause.flatten()
-            : null,
-      },
+        zodError: error.code === 'BAD_REQUEST' && error.cause instanceof ZodError ? error.cause.flatten() : null
+      }
     }
-  },
+  }
 })
 /**
  * Export reusable router and procedure helpers

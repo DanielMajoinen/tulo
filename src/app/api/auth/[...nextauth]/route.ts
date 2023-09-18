@@ -1,11 +1,11 @@
-import { DefaultSession, NextAuthOptions } from "next-auth"
-import NextAuth from "next-auth/next"
-import { env } from "@/lib/env.mjs"
-import GoogleProvider from "next-auth/providers/google"
+import { DefaultSession, NextAuthOptions } from 'next-auth'
+import NextAuth from 'next-auth/next'
+import { env } from '@/lib/env.mjs'
+import GoogleProvider from 'next-auth/providers/google'
 
-declare module "next-auth" {
+declare module 'next-auth' {
   interface Session {
-    user: DefaultSession["user"] & {
+    user: DefaultSession['user'] & {
       id: string
     }
   }
@@ -17,14 +17,14 @@ export const authOptions: NextAuthOptions = {
     session: ({ session, user }) => {
       session.user.id = user.id
       return session
-    },
+    }
   },
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
-    }),
-  ],
+      clientSecret: env.GOOGLE_CLIENT_SECRET
+    })
+  ]
 }
 
 const handler = NextAuth(authOptions)
