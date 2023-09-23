@@ -23,7 +23,11 @@
 			"moby": false,
 			"dockerDashComposeVersion": "v2"
     	},
-		"github-cli": "latest"
+		"github-cli": "latest",
+		"node": {
+			"version": "lts",
+			"nodeGypDependencies": true
+		}
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -39,7 +43,6 @@
 				"bradlc.vscode-tailwindcss",
 				"christian-kohler.npm-intellisense",
 				"dbaeumer.vscode-eslint",
-				"eg2.vscode-npm-script",
 				"ms-azuretools.vscode-docker",
 				"ms-vscode.vscode-typescript-next",
 				"rvest.vs-code-prettier-eslint",
@@ -61,12 +64,6 @@
 				"eslint.validate": [
 					"javascript",
 					"typescript"
-				],
-				"eslint.workingDirectories": [
-					{
-						"directory": "./test-project",
-						"changeProcessCWD": true
-					}
 				],
 				"liveServer.settings.NoBrowser": true,
 				"liveServer.settings.port": 5000
