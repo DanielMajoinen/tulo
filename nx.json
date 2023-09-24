@@ -4,10 +4,17 @@
       "runner": "nx/tasks-runners/default",
       "options": {
         "cacheableOperations": [
-          "build"
+          "build",
+          "lint"
         ]
       }
     }
   },
-  "targetDefaults": {}
+  "targetDefaults": {
+    "lint": {
+      "inputs": [
+        "{projectRoot}/src"
+      ]
+    }
+  }
 }
