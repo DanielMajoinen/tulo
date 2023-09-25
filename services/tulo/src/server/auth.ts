@@ -1,10 +1,9 @@
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { type GetServerSidePropsContext } from 'next'
 import { getServerSession, type DefaultSession, type NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
+import { type JWT, getToken as getJWT } from 'next-auth/jwt'
 
 import { env } from '@/env.mjs'
-import { db } from '@/server/db'
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -26,29 +25,16 @@ declare module 'next-auth' {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
-  callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id
-      }
-    })
-  },
-  adapter: PrismaAdapter(db),
+  session: { strategy: 'jwt' },
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_ID,
-      clientSecret: env.GOOGLE_SECRET,
-      authorization: {
-        params: {
-          prompt: 'consent',
-          access_type: 'offline',
-          response_type: 'code'
-        }
-      }
+      clientSecret: env.GOOGLE_SECRET
     })
-  ]
+  ],
+  pages: {
+    signIn: '/login'
+  }
 }
 
 /**
@@ -58,4 +44,8 @@ export const authOptions: NextAuthOptions = {
  */
 export const getServerAuthSession = (ctx: { req: GetServerSidePropsContext['req']; res: GetServerSidePropsContext['res'] }) => {
   return getServerSession(ctx.req, ctx.res, authOptions)
+}
+
+export const getToken = (ctx: { req: GetServerSidePropsContext['req'] }): Promise<JWT | null> => {
+  return getJWT({ req: ctx.req, secureCookie: process.env.NODE_ENV === 'production' })
 }

@@ -1,16 +1,18 @@
 import * as React from 'react'
 
-const Logo = (props: { width?: number; height?: number; className?: string; color?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={240} height={240} viewBox="0 0 180 180" {...props}>
-    <path
-      fill={props.color}
-      d="M78.5 1.1C-1.55 9.55-28.3 118.35 38.6 163.7c64.25 43.6 148.25-6.55 140.35-83.7C174.3 34.55 131.2-3.35 88.15.15c-.9.05-5.25.5-9.65.95zm32 9.45c49.15 13.35 75 67.55 54 113.1-23.85 51.75-90.7 64.5-131.35 25-48.6-47.25-22.1-129.15 45.35-140 5.75-.95 26.05.3 32 1.9z"
-    />
-    <path
-      fill={props.color}
-      d="M89.8 37c-16.45 2.95-29.05 16.55-30.55 33l-.55 6h-5.3c-6.3 0-8.4 2.15-5.8 5.85 2.05 2.9 63.95 3.45 66.85.6 5.45-5.5 1.8-6.45-24.7-6.45-22.25 0-23.85-.1-23.4-1.75.25-.95.8-3.55 1.15-5.7 2.85-16.75 17.95-26.35 37.05-23.5 10.95 1.65 12.6 1.6 13.8-.3 3.6-5.55-14.1-10.35-28.55-7.75zM47.7 97.3c-3.1 3.1-.2 6.2 5.95 6.3l4.85.05.7 6.4c2.55 22.9 21.35 36.1 46.8 32.9 9.9-1.25 12-2.2 12-5.45 0-2.45-3.25-5.1-4.95-4.05-.5.35-4.15 1-8.1 1.5-20.65 2.6-34.4-6.55-37.8-25-1.25-6.9-3.8-6.2 22.4-6 23.6.15 26.45-.3 26.45-4.5 0-3.2-2.8-3.5-34.65-3.75-29.65-.2-32-.05-33.65 1.6z"
-    />
-  </svg>
+import { Icons } from './icons'
+
+export type LogoProps = React.ComponentPropsWithoutRef<'div'> & {
+  hideText?: boolean
+}
+
+const Logo = ({ hideText, ...props }: LogoProps) => (
+  <div className="flex items-baseline justify-center">
+    <div {...props}>
+      {hideText ? undefined : <h1 className="text-[5rem] font-light tracking-tight selection:text-5xl dark:text-white">Tul</h1>}
+      <Icons.tulo className="h-50 w-50" color="#e66b6c" />
+    </div>
+  </div>
 )
 
 export default Logo
