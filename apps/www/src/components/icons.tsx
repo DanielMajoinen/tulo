@@ -1,4 +1,6 @@
-type IconProps = React.HTMLAttributes<SVGElement>
+'use client'
+
+export type IconProps = React.HTMLAttributes<SVGElement>
 
 export const Icons = {
   twitter: (props: IconProps) => (
