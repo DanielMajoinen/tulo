@@ -6,7 +6,7 @@
     "build:watch": "lerna watch -- lerna run build --since=origin/main --stream",
     "commit": "cz",
     "commit:retry": "cz --retry",
-    "dev": "yarn build:watch",
+    "dev": "lerna run dev --stream",
     "dev:reset": "nx reset",
     "lint": "lerna run lint --since=origin/main --stream",
     "lint:fix": "lerna run lint:fix --since=origin/main --stream",
