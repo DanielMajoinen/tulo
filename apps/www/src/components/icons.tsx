@@ -111,8 +111,8 @@ export const Icons = {
       <path d="M21 12a9 9 0 1 1-6.219-8.56" />
     </svg>
   ),
-  tulo: (props: IconProps & { width?: string; height?: string }) => (
-    <svg role="img" width="50" height="50" viewBox="0 0 180 180" {...props}>
+  tulo: ({ width, height, ...props }: IconProps & { width?: number; height?: number }) => (
+    <svg role="img" width={width ?? 50} height={height ?? 50} viewBox="0 0 180 180" {...props}>
       <path
         d="M78.5 1.1C-1.55 9.55-28.3 118.35 38.6 163.7c64.25 43.6 148.25-6.55 140.35-83.7C174.3 34.55 131.2-3.35 88.15.15c-.9.05-5.25.5-9.65.95zm32 9.45c49.15 13.35 75 67.55 54 113.1-23.85 51.75-90.7 64.5-131.35 25-48.6-47.25-22.1-129.15 45.35-140 5.75-.95 26.05.3 32 1.9z"
         fill="currentColor"
