@@ -14,14 +14,18 @@ export type LoginProvidersProps = {
 export function LoginProviders({ providers }: LoginProvidersProps) {
   return (
     <>
-      {Object.values(providers).map((provider) => (
-        <div className="grid grid-cols-1 gap-6" key={provider.name}>
-          <Button variant="outline" onClick={() => void signIn(provider.id)}>
-            <Icons.google className="mr-2 h-4 w-4" />
-            {provider.name}
-          </Button>
-        </div>
-      ))}
+      {Object.values(providers).map((provider) => {
+        provider.name
+        const Icon = Icons[provider.name as keyof typeof Icons]
+        return (
+          <div className="grid grid-cols-1 gap-6" key={provider.name}>
+            <Button variant="outline" onClick={() => void signIn(provider.id)}>
+              {Icon ? <Icon className="mr-2 h-4 w-4" /> : null}
+              {provider.name}
+            </Button>
+          </div>
+        )
+      })}
     </>
   )
 }
