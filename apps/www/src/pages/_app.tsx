@@ -1,6 +1,5 @@
 import { type Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
-import { AxiomWebVitals } from 'next-axiom'
 import { type AppType } from 'next/app'
 
 import { ThemeProvider } from '@/components/theme-provider'
@@ -11,7 +10,6 @@ import '@/styles/globals.css'
 const Tulo: AppType<{ session: Session | null }> = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <SessionProvider session={session}>
-      <AxiomWebVitals />
       <ThemeProvider>
         <Component {...pageProps} />
       </ThemeProvider>
