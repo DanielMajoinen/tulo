@@ -1,17 +1,18 @@
 'use client'
 
+import DashboardLayout from '@/components/layouts/DashboardLayout'
 import { signIn, signOut, useSession } from 'next-auth/react'
 
 export default function Dashboard() {
   return (
-    <>
+    <DashboardLayout>
       <div className="flex min-h-screen flex-col items-center justify-center">
         <div className="flex items-baseline justify-between gap-x-1 py-8">
           <h1 className="text-[5rem] font-light tracking-tight text-black selection:text-5xl dark:text-white">Welcome</h1>
         </div>
         <AuthShowcase />
       </div>
-    </>
+    </DashboardLayout>
   )
 }
 

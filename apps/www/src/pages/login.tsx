@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { LoginProviders } from '@/components/login-providers'
 import Logo from '@/components/logo'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 export const getStaticProps = async () => {
   const providers = await getProviders()
@@ -28,16 +29,21 @@ export default function Login({ providers }: InferGetStaticPropsType<typeof getS
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <Card>
-        <CardHeader className="space-y-1">
-          <Logo hideText={true} />
-        </CardHeader>
-        <CardContent className="grid gap-4">
-          <Divider />
-          <LoginProviders providers={providers} />
-        </CardContent>
-      </Card>
-    </div>
+    <>
+      <div className="absolute bottom-1 right-1">
+        <ThemeToggle />
+      </div>
+      <div className="flex min-h-screen flex-col items-center justify-center">
+        <Card>
+          <CardHeader className="space-y-1">
+            <Logo hideText={true} />
+          </CardHeader>
+          <CardContent className="grid gap-4">
+            <Divider />
+            <LoginProviders providers={providers} />
+          </CardContent>
+        </Card>
+      </div>
+    </>
   )
 }
