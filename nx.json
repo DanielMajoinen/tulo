@@ -11,6 +11,20 @@
     }
   },
   "targetDefaults": {
+    "build": {
+      "inputs": [
+        "{projectRoot}/public",
+        "{projectRoot}/src",
+        "{projectRoot}/next.config.mjs",
+        "{projectRoot}/package.json",
+        "{projectRoot}/postcss.config.cjs",
+        "{projectRoot}/tailwind.config.ts",
+        "{projectRoot}/tsconfig.json"
+      ],
+      "dependsOn": [
+        "^build"
+      ]
+    },
     "lint": {
       "inputs": [
         "{projectRoot}/src"
