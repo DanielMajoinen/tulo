@@ -1,15 +1,17 @@
 import { type Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
+import { AxiomWebVitals } from 'next-axiom'
 import { type AppType } from 'next/app'
 
-import { api } from '@/utils/api'
 import { ThemeProvider } from '@/components/theme-provider'
+import { api } from '@/utils/api'
 
 import '@/styles/globals.css'
 
-const MyApp: AppType<{ session: Session | null }> = ({ Component, pageProps: { session, ...pageProps } }) => {
+const Tulo: AppType<{ session: Session | null }> = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <SessionProvider session={session}>
+      <AxiomWebVitals />
       <ThemeProvider>
         <Component {...pageProps} />
       </ThemeProvider>
@@ -17,4 +19,4 @@ const MyApp: AppType<{ session: Session | null }> = ({ Component, pageProps: { s
   )
 }
 
-export default api.withTRPC(MyApp)
+export default api.withTRPC(Tulo)
