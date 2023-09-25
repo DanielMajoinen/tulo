@@ -14,7 +14,7 @@
     "watch": "lerna watch -- "
   },
   "workspaces": [
-    "services/*"
+    "apps/*"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
