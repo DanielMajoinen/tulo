@@ -1,14 +1,32 @@
+'use client'
+
 import { Divider } from '@nextui-org/react'
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
-import { getServerSession } from 'next-auth/next'
-import { getProviders } from 'next-auth/react'
+import type { InferGetStaticPropsType } from 'next'
+import { getProviders, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 import { LoginProviders } from '@/components/login-providers'
 import Logo from '@/components/logo'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { authOptions } from '@/server/auth'
 
-export default function Login({ providers }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export const getStaticProps = async () => {
+  const providers = await getProviders()
+
+  return {
+    props: { providers: providers ?? ([] as InferGetStaticPropsType<typeof getProviders>) }
+  }
+}
+
+export default function Login({ providers }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const session = useSession()
+  const router = useRouter()
+
+  // Redirect authenticated users to the dashboard
+  // TODO: Move this logic into middleware
+  if (session.status === 'authenticated') {
+    router.push('/')
+  }
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <Card>
@@ -22,21 +40,4 @@ export default function Login({ providers }: InferGetServerSidePropsType<typeof 
       </Card>
     </div>
   )
-}
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerSession(context.req, context.res, authOptions)
-
-  // If the user is already logged in, redirect.
-  // Note: Make sure not to redirect to the same page
-  // To avoid an infinite loop!
-  if (session) {
-    return { redirect: { destination: '/' } }
-  }
-
-  const providers = await getProviders()
-
-  return {
-    props: { providers: providers ?? [] }
-  }
 }
