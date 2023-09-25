@@ -1,6 +1,6 @@
 'use client'
 
-import { ThemeToggle } from '../theme-toggle'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
