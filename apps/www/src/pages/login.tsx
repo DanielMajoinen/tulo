@@ -36,7 +36,7 @@ export default function Login({ providers }: InferGetStaticPropsType<typeof getS
       <div className="flex min-h-screen flex-col items-center justify-center">
         <Card>
           <CardHeader className="space-y-1">
-            <Logo hideText={true} />
+            <Logo className="justify-center" hideText={true} />
           </CardHeader>
           <CardContent className="grid gap-4">
             <Divider />
