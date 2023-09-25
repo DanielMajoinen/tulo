@@ -16,7 +16,7 @@ export function LoginProviders({ providers }: LoginProvidersProps) {
     <>
       {Object.values(providers).map((provider) => {
         provider.name
-        const Icon = Icons[provider.name as keyof typeof Icons]
+        const Icon = Icons[provider.name.toLowerCase() as keyof typeof Icons]
         return (
           <div className="grid grid-cols-1 gap-6" key={provider.name}>
             <Button variant="outline" onClick={() => void signIn(provider.id)}>
