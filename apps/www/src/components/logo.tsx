@@ -6,15 +6,37 @@ import { Icons } from './icons'
 
 export type LogoProps = React.ComponentPropsWithoutRef<'div'> & {
   hideText?: boolean
+  size?: 'sm' | 'base' | 'lg'
 }
 
-const Logo = ({ hideText, ...props }: LogoProps) => (
-  <div className="flex items-baseline justify-center">
-    <div {...props}>
-      {hideText ? undefined : <h1 className="text-[5rem] font-light tracking-tight selection:text-5xl dark:text-white">Tul</h1>}
-      <Icons.tulo className="h-50 w-50" color="#e66b6c" />
+const Logo = ({ hideText, size, className, ...props }: LogoProps) => {
+  let px: number
+  let textSize: string
+  switch (size) {
+    case 'sm':
+      px = 15
+      textSize = 'text-3xl'
+      break
+    case 'base':
+      px = 30
+      textSize = 'text-6xl'
+      break
+    case 'lg':
+      px = 50
+      textSize = 'text-8xl'
+      break
+    default:
+      px = 30
+      textSize = 'text-6xl'
+      break
+  }
+
+  return (
+    <div className={`flex items-baseline ${className}`} {...props}>
+      {hideText ? undefined : <h1 className={`${textSize} font-light tracking-tight text-black dark:text-white`}>Tul</h1>}
+      <Icons.tulo height={px} width={px} color="#e66b6c" />
     </div>
-  </div>
-)
+  )
+}
 
 export default Logo
