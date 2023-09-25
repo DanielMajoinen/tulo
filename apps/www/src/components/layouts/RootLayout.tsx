@@ -1,8 +1,8 @@
 'use client'
 
-import { ThemeToggle } from './theme-toggle'
+import { ThemeToggle } from '../theme-toggle'
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div className="absolute bottom-1 right-1">

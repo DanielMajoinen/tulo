@@ -3,7 +3,7 @@ import { SessionProvider } from 'next-auth/react'
 import { AxiomWebVitals } from 'next-axiom'
 import { type AppType } from 'next/app'
 
-import { ThemeProvider } from '@/components/theme-provider'
+import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { api } from '@/utils/api'
 
 import '@/styles/globals.css'
