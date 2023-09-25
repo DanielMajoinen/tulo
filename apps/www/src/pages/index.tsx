@@ -1,13 +1,8 @@
 import { signIn, signOut, useSession } from 'next-auth/react'
 
-import { ThemeToggle } from '@/components/theme-toggle'
-
 export default function Dashboard() {
   return (
     <>
-      <div className="absolute bottom-0 right-0">
-        <ThemeToggle />
-      </div>
       <div className="flex min-h-screen flex-col items-center justify-center">
         <div className="flex items-baseline justify-between gap-x-1 py-8">
           <h1 className="text-[5rem] font-light tracking-tight text-black selection:text-5xl dark:text-white">Welcome</h1>
