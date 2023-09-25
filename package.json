@@ -10,7 +10,7 @@
     "dev:reset": "nx reset",
     "lint": "lerna run lint --since=origin/main --stream",
     "lint:fix": "lerna run lint:fix --since=origin/main --stream",
-    "postinstall": "husky install",
+    "prepare": "husky install",
     "watch": "lerna watch -- "
   },
   "workspaces": [
