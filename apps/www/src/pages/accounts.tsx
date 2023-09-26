@@ -4,7 +4,7 @@ import DashboardLayout from '@/components/layouts/dashboard/DashboardLayout'
 
 export default function Dashboard() {
   return (
-    <DashboardLayout activePageName="Home">
+    <DashboardLayout activePageName="Accounts">
       <div className="flex flex-none flex-col"></div>
     </DashboardLayout>
   )
