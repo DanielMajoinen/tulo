@@ -1,6 +1,6 @@
 'use client'
 
-import { PiggyBank } from 'lucide-react'
+import { Home, PiggyBank } from 'lucide-react'
 
 import MenuOption, { type MenuOptionProps } from '@/components/menu/MenuOption'
 
@@ -11,6 +11,11 @@ export type MenuOptionsProps = {
 
 export default function MenuOptions({ activePageName, limitToActivePage }: MenuOptionsProps) {
   const options: MenuOptionProps[] = [
+    {
+      name: 'Home',
+      icon: <Home />,
+      url: '/'
+    },
     {
       name: 'Accounts',
       icon: <PiggyBank />,

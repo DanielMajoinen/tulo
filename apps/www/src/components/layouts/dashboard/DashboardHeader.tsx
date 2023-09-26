@@ -38,7 +38,7 @@ export default function DashboardHeader({ activePageName }: DashboardHeaderProps
                   <Icons.tulo className="h-8" color="#e66b6c" />
                 </SheetTitle>
               </SheetHeader>
-              <div className="flex flex-1 justify-center gap-3">
+              <div className="flex-1 gap-3">
                 <MenuOptions activePageName={activePageName} />
               </div>
               <Separator className="mb-5" />
