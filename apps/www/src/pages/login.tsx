@@ -23,16 +23,13 @@ export default function Login({ providers }: InferGetStaticPropsType<typeof getS
   const router = useRouter()
 
   // Redirect authenticated users to the dashboard
-  // TODO: Move this logic into middleware
   if (session.status === 'authenticated') {
     router.push('/')
   }
 
   return (
     <>
-      <div className="absolute bottom-1 right-1">
-        <ThemeToggle />
-      </div>
+      {/* Login providers */}
       <div className="flex min-h-screen flex-col items-center justify-center">
         <Card>
           <CardHeader className="space-y-1">
@@ -43,6 +40,10 @@ export default function Login({ providers }: InferGetStaticPropsType<typeof getS
             <LoginProviders providers={providers} />
           </CardContent>
         </Card>
+      </div>
+      {/* Theme toggle */}
+      <div className="absolute bottom-1 right-1">
+        <ThemeToggle />
       </div>
     </>
   )
