@@ -12,13 +12,13 @@ export type MenuOptionsProps = {
 export default function MenuOptions({ activePageName, limitToActivePage }: MenuOptionsProps) {
   const options: MenuOptionProps[] = [
     {
-      name: 'Home',
       icon: <Home />,
+      name: 'Home',
       url: '/'
     },
     {
-      name: 'Accounts',
       icon: <PiggyBank />,
+      name: 'Accounts',
       url: '/accounts'
     }
   ].filter(({ name }) => !limitToActivePage || !activePageName || name.toLowerCase() === activePageName.toLowerCase())

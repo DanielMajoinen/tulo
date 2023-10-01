@@ -40,3 +40,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# lerna
+lerna-debug.log
+lerna-error.log

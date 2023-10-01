@@ -37,10 +37,12 @@
     ],
     "import/no-unresolved": "error",
     "import/first": "error",
+    "import/named": "off",
     "import/newline-after-import": "error",
     "import/no-duplicates": "error",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
+    "sort-keys-fix/sort-keys-fix": "warn",
     "prettier/prettier": [
       "error",
       {
@@ -51,7 +53,7 @@
       }
     ]
   },
-  "plugins": ["@typescript-eslint", "simple-import-sort", "import"],
+  "plugins": ["@typescript-eslint", "sort-keys-fix", "simple-import-sort", "import"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]

@@ -25,16 +25,16 @@ declare module 'next-auth' {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
-  session: { strategy: 'jwt' },
+  pages: {
+    signIn: '/login'
+  },
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_ID,
       clientSecret: env.GOOGLE_SECRET
     })
   ],
-  pages: {
-    signIn: '/login'
-  }
+  session: { strategy: 'jwt' }
 }
 
 /**
