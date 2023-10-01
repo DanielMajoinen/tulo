@@ -1,19 +1,25 @@
 {
   "root": true,
+  "env": {
+    "browser": true,
+    "es2017": true,
+    "node": true,
+    "jest": true
+  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": true,
     "ecmaVersion": 5,
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint"],
   "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
     "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:@typescript-eslint/stylistic-type-checked",
     "plugin:prettier/recommended"
   ],
   "rules": {
+    "@next/next/no-html-link-for-pages": ["error", "apps/www/src/pages/"],
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/consistent-type-imports": [
@@ -29,6 +35,12 @@
         "argsIgnorePattern": "^_"
       }
     ],
+    "import/no-unresolved": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
     "prettier/prettier": [
       "error",
       {
@@ -38,5 +50,20 @@
         "trailingComma": "none"
       }
     ]
-  }
+  },
+  "plugins": ["@typescript-eslint", "simple-import-sort", "import"],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+        "project": [
+          "apps/*/tsconfig.json"
+        ]
+      }
+    }
+  },
+	"ignorePatterns": ["node_modules/", ".next/"]
 }

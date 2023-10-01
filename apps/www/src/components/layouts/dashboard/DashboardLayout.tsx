@@ -1,5 +1,7 @@
 'use client'
 
+import * as React from 'react'
+
 import DashboardHeader from '@/components/layouts/dashboard/DashboardHeader'
 import DashboardSidebar from '@/components/layouts/dashboard/DashboardSidebar'
 

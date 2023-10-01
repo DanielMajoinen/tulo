@@ -1,5 +1,7 @@
 'use client'
 
+import * as React from 'react'
+
 export type IconProps = React.HTMLAttributes<SVGElement>
 
 export const Icons = {

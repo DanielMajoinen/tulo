@@ -1,6 +1,7 @@
 'use client'
 
 import { Menu } from 'lucide-react'
+import * as React from 'react'
 
 import MenuFooter from '@/components/menu/MenuFooter'
 import MenuOptions from '@/components/menu/MenuOptions'

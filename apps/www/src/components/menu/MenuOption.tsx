@@ -1,6 +1,7 @@
 'use client'
 
 import { Link } from '@nextui-org/react'
+import * as React from 'react'
 
 export type MenuOptionProps = {
   name: string

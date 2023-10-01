@@ -2,8 +2,8 @@
 
 import { Divider } from '@nextui-org/react'
 import type { InferGetStaticPropsType } from 'next'
-import { getProviders, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { getProviders, useSession } from 'next-auth/react'
 
 import { LoginProviders } from '@/components/login-providers'
 import Logo from '@/components/logo'

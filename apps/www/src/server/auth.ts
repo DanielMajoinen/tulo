@@ -1,7 +1,7 @@
 import { type GetServerSidePropsContext } from 'next'
-import { getServerSession, type DefaultSession, type NextAuthOptions } from 'next-auth'
+import { type DefaultSession, getServerSession, type NextAuthOptions } from 'next-auth'
+import { getToken as getJWT, type JWT } from 'next-auth/jwt'
 import GoogleProvider from 'next-auth/providers/google'
-import { type JWT, getToken as getJWT } from 'next-auth/jwt'
 
 import { env } from '@/env.mjs'
 
