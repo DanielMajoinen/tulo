@@ -44,17 +44,9 @@
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "sort-keys-fix/sort-keys-fix": "warn",
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "printWidth": 140,
-        "semi": false,
-        "trailingComma": "none"
-      }
-    ]
+    "prettier/prettier": "error"
   },
-  "plugins": ["@typescript-eslint", "sort-keys-fix", "simple-import-sort", "import"],
+  "plugins": ["@typescript-eslint", "sort-keys-fix", "simple-import-sort", "import", "prettier"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
