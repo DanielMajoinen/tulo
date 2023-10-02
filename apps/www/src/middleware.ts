@@ -7,6 +7,11 @@ export default withAuth(
     if (req.nextUrl.pathname !== '/login' && !req.nextauth.token) {
       return NextResponse.redirect(new URL('/login', req.url))
     }
+
+    // Otherwise redirect to index
+    if (req.nextUrl.pathname !== '/') {
+      return NextResponse.redirect(new URL('/', req.url))
+    }
   },
   {
     pages: {

@@ -25,6 +25,15 @@ declare module 'next-auth' {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
+  callbacks: {
+    session(params) {
+      console.log(params)
+      return {
+        ...params.session,
+        user: { ...params.session.user, id: params.token.email }
+      }
+    }
+  },
   pages: {
     signIn: '/login'
   },
@@ -47,5 +56,8 @@ export const getServerAuthSession = (ctx: { req: GetServerSidePropsContext['req'
 }
 
 export const getToken = (ctx: { req: GetServerSidePropsContext['req'] }): Promise<JWT | null> => {
-  return getJWT({ req: ctx.req, secureCookie: process.env.NODE_ENV === 'production' })
+  return getJWT({
+    req: ctx.req,
+    secureCookie: process.env.NODE_ENV === 'production'
+  })
 }
