@@ -27,7 +27,6 @@ declare module 'next-auth' {
 export const authOptions: NextAuthOptions = {
   callbacks: {
     session(params) {
-      console.log(params)
       return {
         ...params.session,
         user: { ...params.session.user, id: params.token.email }
