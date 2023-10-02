@@ -3,10 +3,11 @@
 import { Divider } from '@nextui-org/react'
 import type { InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/navigation'
-import { getProviders, useSession } from 'next-auth/react'
+import { getProviders, signIn, useSession } from 'next-auth/react'
 
-import { LoginProviders } from '@/components/login-providers'
+import { Icons } from '@/components/icons'
 import Logo from '@/components/logo'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 
@@ -14,8 +15,33 @@ export const getStaticProps = async () => {
   const providers = await getProviders()
 
   return {
-    props: { providers: providers ?? ([] as InferGetStaticPropsType<typeof getProviders>) }
+    props: {
+      providers: providers ?? ([] as InferGetStaticPropsType<typeof getProviders>)
+    }
   }
+}
+
+type LoginProvidersProps = {
+  providers: InferGetStaticPropsType<typeof getStaticProps>['providers']
+}
+
+function LoginProviders({ providers }: LoginProvidersProps) {
+  return (
+    <>
+      {Object.values(providers).map((provider) => {
+        const Icon = Icons[provider.name.toLowerCase() as keyof typeof Icons]
+
+        return (
+          <div className="grid grid-cols-1 gap-6" key={provider.name}>
+            <Button variant="outline" onClick={() => void signIn(provider.id)}>
+              {Icon ? <Icon className="mr-2 h-4 w-4" /> : null}
+              {provider.name}
+            </Button>
+          </div>
+        )
+      })}
+    </>
+  )
 }
 
 export default function Login({ providers }: InferGetStaticPropsType<typeof getStaticProps>) {
