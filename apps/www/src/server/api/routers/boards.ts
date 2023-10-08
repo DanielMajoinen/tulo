@@ -11,9 +11,10 @@ export const boardsRouter = createTRPCRouter({
       // Accounts
       {
         id: 'accounts',
-        name: 'Accounts',
-        description: 'Accounts',
-        owner: 'DanielMajoinen',
+        name: 'Account Balances & Transactions',
+        description: 'Track your bank accounts, credit cards, cash, or investments and their related transactions over time.',
+        owner: 'Tulo',
+        tags: ['Essentials'],
         inputs: [
           {
             id: 'account',

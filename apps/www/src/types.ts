@@ -43,6 +43,7 @@ export type Board = {
   owner: string
   inputs: Inputs
   outputs?: Outputs
+  tags?: string[]
 }
 
 export type Boards = Board[]
