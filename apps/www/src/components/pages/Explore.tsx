@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react'
 
 import DashboardLayout from '@/components/layouts/dashboard/DashboardLayout'
-import BoardCard from '@/components/pages/explore/BoardCard'
+import ExploreContent from '@/components/pages/explore/ExploreContent'
 import { api } from '@/utils/api'
 
 export default function Explore() {
@@ -16,13 +16,7 @@ export default function Explore() {
   return (
     <DashboardLayout activePageName="Explore">
       {boards.isLoading && <p>Loading ...</p>}
-      {boards.data && (
-        <div className="flex flex-wrap gap-5">
-          {boards.data.map((board) => (
-            <BoardCard key={board.id} {...board} />
-          ))}
-        </div>
-      )}
+      {boards.data && <ExploreContent boards={boards.data} />}
     </DashboardLayout>
   )
 }
