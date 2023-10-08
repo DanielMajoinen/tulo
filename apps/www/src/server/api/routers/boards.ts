@@ -88,6 +88,15 @@ export const boardsRouter = createTRPCRouter({
             ]
           }
         ]
+      },
+      // Loans
+      {
+        id: 'loans',
+        name: 'Loans & Repayments',
+        description: "Track your home loans, car loans, student loans, or any other type of loan and it's related repayments over time.",
+        owner: 'Tulo',
+        tags: ['Essentials'],
+        inputs: []
       }
     ]
 

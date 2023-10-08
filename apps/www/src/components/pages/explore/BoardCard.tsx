@@ -12,23 +12,27 @@ const BoardCard: React.FC<BoardCardProps> = ({ name, owner, description, tags }:
   const isTuloOwned = owner === 'Tulo'
 
   return (
-    <Card className="min-w-[220px]">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+    <Card className="flex max-h-[50%] w-full flex-col md:w-auto md:max-w-[calc(50%-10px)] lg:max-w-[calc(33%-10px)]">
+      <CardHeader className="flex-none pb-3">
         <CardTitle className="text-2xl font-bold">{name}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-1 flex-col gap-0">
         {/* Tags */}
-        <div className="mb-2 flex gap-3">
+        <div className="mb-3 flex flex-none gap-3">
           {isTuloOwned && <TuloBadge />}
           {tags?.map((tag) => <Badge key={`tag-${tag}`}>{tag}</Badge>)}
         </div>
-        {/* Description */}
-        <p className="text-xs text-muted-foreground">{description}</p>
-        {/* Actions */}
-        <Button className="mt-5 w-full" variant="secondary">
-          Preview
-        </Button>
-        <Button className="mt-5 w-full">Create</Button>
+        <div className="flex flex-1 flex-col">
+          {/* Description */}
+          <p className="flex-1 text-xs text-muted-foreground">{description}</p>
+          {/* Actions */}
+          <div className="mt-5 flex flex-none flex-col gap-3">
+            <Button className="w-full flex-none" variant="secondary">
+              Preview
+            </Button>
+            <Button className="w-full flex-none">Create</Button>
+          </div>
+        </div>
       </CardContent>
     </Card>
   )

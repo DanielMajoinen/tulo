@@ -17,7 +17,7 @@ export default function Explore() {
     <DashboardLayout activePageName="Explore">
       {boards.isLoading && <p>Loading ...</p>}
       {boards.data && (
-        <div className="max-w-sm">
+        <div className="flex flex-wrap gap-5">
           {boards.data.map((board) => (
             <BoardCard key={board.id} {...board} />
           ))}
