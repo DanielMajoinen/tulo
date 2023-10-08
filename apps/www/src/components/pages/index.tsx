@@ -3,20 +3,14 @@
 import { makeRoutes, Outlet, Router } from '@verdant-web/react-router'
 import { Suspense } from 'react'
 
-import AccountsPage from '@/components/pages/AccountsPage'
-import HomePage from '@/components/pages/HomePage'
+import Explore from '@/components/pages/Explore'
 
 export default function Index() {
   const routes = makeRoutes([
     {
-      component: () => <HomePage />,
+      component: () => <Explore />,
       exact: true,
       path: '/'
-    },
-    {
-      component: () => <AccountsPage />,
-      exact: true,
-      path: '/accounts'
     }
   ])
 

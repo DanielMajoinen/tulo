@@ -2,10 +2,10 @@
 
 import DashboardLayout from '@/components/layouts/dashboard/DashboardLayout'
 
-export default function HomePage() {
+export default function Explore() {
   return (
-    <DashboardLayout activePageName="Home">
-      <h1>Home</h1>
+    <DashboardLayout activePageName="Explore">
+      <h1>Explore</h1>
     </DashboardLayout>
   )
 }

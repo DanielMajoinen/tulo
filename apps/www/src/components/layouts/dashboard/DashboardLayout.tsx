@@ -17,12 +17,11 @@ export default function DashboardLayout({ activePageName, children }: DashboardL
       <div className="mx-5 mt-5 flex-none xl:hidden">
         <DashboardHeader activePageName={activePageName} />
       </div>
-      {/* Sidebar only displayed on medium sized screens */}
+      {/* Contents */}
       <div className="flex flex-1 gap-5">
+        {/* Sidebar only displayed on medium sized screens */}
         <DashboardSidebar className="my-5 ml-5 hidden xl:flex" activePageName={activePageName} />
-        <div className="flex flex-1">
-          <div className="m-5 md:mx-0">{children}</div>
-        </div>
+        <div className="my-5 flex flex-1 xl:mr-5">{children}</div>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 'use client'
 
-import { Home, PiggyBank } from 'lucide-react'
+import { Globe } from 'lucide-react'
 
 import MenuOption, { type MenuOptionProps } from '@/components/menu/MenuOption'
 
@@ -12,14 +12,9 @@ export type MenuOptionsProps = {
 export default function MenuOptions({ activePageName, limitToActivePage }: MenuOptionsProps) {
   const options: MenuOptionProps[] = [
     {
-      icon: <Home />,
-      name: 'Home',
+      icon: <Globe />,
+      name: 'Explore',
       url: '/'
-    },
-    {
-      icon: <PiggyBank />,
-      name: 'Accounts',
-      url: '/accounts'
     }
   ].filter(({ name }) => !limitToActivePage || !activePageName || name.toLowerCase() === activePageName.toLowerCase())
 
