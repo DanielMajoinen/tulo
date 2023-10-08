@@ -21,7 +21,7 @@ export default function DashboardLayout({ activePageName, children }: DashboardL
       <div className="flex flex-1 gap-5">
         {/* Sidebar only displayed on medium sized screens */}
         <DashboardSidebar className="my-5 ml-5 hidden xl:flex" activePageName={activePageName} />
-        <div className="my-5 flex flex-1 xl:mr-5">{children}</div>
+        <div className="m-5 flex flex-1 xl:ml-0">{children}</div>
       </div>
     </div>
   )
