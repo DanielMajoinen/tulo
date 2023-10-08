@@ -9,7 +9,7 @@ export default withAuth(
     }
 
     // Otherwise redirect to index
-    if (req.nextUrl.pathname !== '/') {
+    if (!req.nextUrl.pathname.startsWith('/api/') && req.nextUrl.pathname !== '/') {
       return NextResponse.redirect(new URL('/', req.url))
     }
   },
