@@ -15,7 +15,7 @@ export default function DashboardSidebar({ className, activePageName }: Dashboar
   return (
     <Card className={`flex flex-col ${className}`}>
       <CardHeader className="flex-none p-0 py-5">
-        <MenuHeader />
+        <MenuHeader activePageName={activePageName} />
       </CardHeader>
       <Separator className="" />
       <CardContent className="flex-1 p-0 py-5">

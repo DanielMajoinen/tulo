@@ -14,7 +14,7 @@ export default function DashboardHeader({ activePageName }: DashboardHeaderProps
   return (
     <Navbar>
       <NavbarBrand>
-        <MenuHeader />
+        <MenuHeader activePageName={activePageName} />
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem>
