@@ -1,1 +1,6 @@
+.next
+node_modules
+
 src/components/ui
+src/stores/*/client/**/*
+src/stores/*/migrations/**/*

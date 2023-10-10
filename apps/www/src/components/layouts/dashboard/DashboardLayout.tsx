@@ -1,10 +1,11 @@
 'use client'
 
-import DashboardHeader from '@/components/layouts/dashboard/DashboardHeader'
-import DashboardSidebar from '@/components/layouts/dashboard/DashboardSidebar'
+import { type ReactNode } from 'react'
 
-export type DashboardLayoutProps = {
-  children?: React.ReactNode
+import { DashboardHeader, DashboardSidebar } from '@/components/layouts/dashboard'
+
+type DashboardLayoutProps = {
+  children?: ReactNode
   activePageName?: string
 }
 
@@ -15,12 +16,11 @@ export default function DashboardLayout({ activePageName, children }: DashboardL
       <div className="mx-5 mt-5 flex-none xl:hidden">
         <DashboardHeader activePageName={activePageName} />
       </div>
-      {/* Sidebar only displayed on medium sized screens */}
+      {/* Contents */}
       <div className="flex flex-1 gap-5">
+        {/* Sidebar only displayed on medium sized screens */}
         <DashboardSidebar className="my-5 ml-5 hidden xl:flex" activePageName={activePageName} />
-        <div className="flex flex-1">
-          <div className="m-5 md:mx-0">{children}</div>
-        </div>
+        <div className="m-5 flex flex-1 xl:ml-0">{children}</div>
       </div>
     </div>
   )

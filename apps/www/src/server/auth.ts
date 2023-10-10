@@ -1,7 +1,7 @@
 import { type GetServerSidePropsContext } from 'next'
-import { getServerSession, type DefaultSession, type NextAuthOptions } from 'next-auth'
+import { type DefaultSession, getServerSession, type NextAuthOptions } from 'next-auth'
+import { getToken as getJWT, type JWT } from 'next-auth/jwt'
 import GoogleProvider from 'next-auth/providers/google'
-import { type JWT, getToken as getJWT } from 'next-auth/jwt'
 
 import { env } from '@/env.mjs'
 
@@ -25,16 +25,24 @@ declare module 'next-auth' {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
-  session: { strategy: 'jwt' },
+  callbacks: {
+    session(params) {
+      return {
+        ...params.session,
+        user: { ...params.session.user, id: params.token.email }
+      }
+    }
+  },
+  pages: {
+    signIn: '/login'
+  },
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_ID,
       clientSecret: env.GOOGLE_SECRET
     })
   ],
-  pages: {
-    signIn: '/login'
-  }
+  session: { strategy: 'jwt' }
 }
 
 /**
@@ -47,5 +55,8 @@ export const getServerAuthSession = (ctx: { req: GetServerSidePropsContext['req'
 }
 
 export const getToken = (ctx: { req: GetServerSidePropsContext['req'] }): Promise<JWT | null> => {
-  return getJWT({ req: ctx.req, secureCookie: process.env.NODE_ENV === 'production' })
+  return getJWT({
+    req: ctx.req,
+    secureCookie: process.env.NODE_ENV === 'production'
+  })
 }
