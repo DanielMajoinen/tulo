@@ -8,8 +8,11 @@ export default withAuth(
       return NextResponse.redirect(new URL('/login', req.url))
     }
 
-    // Otherwise redirect to index
-    if (!req.nextUrl.pathname.startsWith('/api/') && req.nextUrl.pathname !== '/') {
+    // Allow requests to /api/* and /_vercel/* to pass through
+    const allowList = ['/api/', '/_vercel/']
+
+    if (req.nextUrl.pathname !== '/' && !allowList.some((path) => req.nextUrl.pathname.startsWith(path))) {
+      // Otherwise redirect to index page
       return NextResponse.redirect(new URL('/', req.url))
     }
   },
