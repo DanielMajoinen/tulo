@@ -1,49 +1,25 @@
-export type OutputField = {
+export type Prettify<T> = {
+  [K in keyof T]: T[K]
+} & {}
+
+/**
+ * @example 'Balance'
+ */
+export type BoardInput = {
   id: string
   name: string
-  type: 'text' | 'number' | 'date'
+  description: string
+  type: 'text' | 'number' | 'currency' | 'date' | 'switch' | 'currency-select'
 }
 
-export type OutputFields = OutputField[]
-
-export type Output = {
-  id: string
-  name: string
-  fields: OutputFields
-  multiple?: boolean
-}
-
-export type Outputs = Output[]
-
-export type InputField = {
-  id: string
-  name: string
-  type: 'text' | 'number' | 'date' | 'checkbox' | 'select'
-  options?: {
-    label: string
-    value: string
-  }[]
-}
-
-export type InputFields = InputField[]
-
-export type Input = {
-  id: string
-  name: string
-  fields: InputFields
-  multiple?: boolean
-}
-
-export type Inputs = Input[]
-
+/**
+ * @example 'Account Balances & Transactions'
+ */
 export type Board = {
   id: string
   name: string
   description: string
   owner: string
-  inputs: Inputs
-  outputs?: Outputs
+  inputs: BoardInput[]
   tags?: string[]
 }
-
-export type Boards = Board[]

@@ -1,3 +1,4 @@
+import { useNavigate } from '@verdant-web/react-router'
 import { BadgeCheck } from 'lucide-react'
 import * as React from 'react'
 
@@ -8,7 +9,9 @@ import { type Board } from '@/types'
 
 type BoardCardProps = Board
 
-const BoardCard: React.FC<BoardCardProps> = ({ name, owner, description, tags }: BoardCardProps) => {
+const BoardCard: React.FC<BoardCardProps> = (props: BoardCardProps) => {
+  const { id, name, owner, description, tags } = props
+  const navigate = useNavigate()
   const isTuloOwned = owner === 'Tulo'
 
   return (
@@ -27,10 +30,9 @@ const BoardCard: React.FC<BoardCardProps> = ({ name, owner, description, tags }:
           <p className="flex-1 text-xs text-muted-foreground">{description}</p>
           {/* Actions */}
           <div className="mt-5 flex flex-none flex-col gap-3">
-            <Button className="w-full flex-none" variant="secondary">
-              Preview
+            <Button className="w-full" onClick={() => navigate(`/create/${id}`)}>
+              Create
             </Button>
-            <Button className="w-full flex-none">Create</Button>
           </div>
         </div>
       </CardContent>

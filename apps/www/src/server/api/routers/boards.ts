@@ -5,83 +5,24 @@ import { createTRPCRouter, protectedProcedure } from '@/server/api/trpc'
 import { type Board } from '@/types'
 
 const boards: Record<string, Board> = {
-  accounts: {
-    id: 'accounts',
-    name: 'Account Balances & Transactions',
-    description: 'Track your bank accounts, credit cards, cash, or investments and their related transactions over time.',
+  account: {
+    id: 'account',
+    name: 'Account Balance & Transactions',
+    description: "Track a bank account, credit card, cash, or investment and it's related transactions over time.",
     owner: 'Tulo',
     tags: ['Essentials'],
     inputs: [
       {
-        id: 'account',
-        name: 'Account',
-        multiple: true,
-        fields: [
-          {
-            id: 'name',
-            name: 'Name',
-            type: 'text'
-          },
-          {
-            id: 'currency',
-            name: 'Currency',
-            options: [
-              {
-                label: 'USD',
-                value: 'usd'
-              },
-              {
-                label: 'EUR',
-                value: 'eur'
-              },
-              {
-                label: 'GBP',
-                value: 'gbp'
-              },
-              {
-                label: 'CAD',
-                value: 'cad'
-              },
-              {
-                label: 'AUD',
-                value: 'aud'
-              }
-            ],
-            type: 'select'
-          },
-          {
-            id: 'balance',
-            name: 'Balance',
-            type: 'number'
-          },
-          {
-            id: 'type',
-            name: 'Type',
-            options: [
-              {
-                label: 'Bank',
-                value: 'bank'
-              },
-              {
-                label: 'Credit Card',
-                value: 'credit-card'
-              },
-              {
-                label: 'Cash',
-                value: 'cash'
-              },
-              {
-                label: 'Investment',
-                value: 'investment'
-              },
-              {
-                label: 'Other',
-                value: 'other'
-              }
-            ],
-            type: 'select'
-          }
-        ]
+        id: 'currency',
+        name: 'Currency',
+        description: 'The currency of the account.',
+        type: 'currency-select'
+      },
+      {
+        id: 'balance',
+        name: 'Balance',
+        description: 'The current balance of the account.',
+        type: 'currency'
       }
     ]
   },

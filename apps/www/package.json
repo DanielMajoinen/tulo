@@ -7,8 +7,8 @@
     "dev": "next dev",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "schemas": "bun run schema:accounts",
-    "schema:accounts": "verdant --schema src/stores/accounts/schema.ts --output src/stores/accounts/client --react",
+    "schemas": "bun run schema:inputs",
+    "schema:inputs": "verdant --schema src/stores/inputs/schema.ts --output src/stores/inputs/client --react",
     "start": "next start"
   },
   "dependencies": {
