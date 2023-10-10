@@ -47,6 +47,7 @@
     "@trpc/next": "^10.38.3",
     "@trpc/react-query": "^10.38.3",
     "@trpc/server": "^10.38.3",
+    "@vercel/analytics": "^1.1.0",
     "@verdant-web/react": "^21.1.2",
     "@verdant-web/react-router": "^0.5.3",
     "@verdant-web/store": "^2.5.8",

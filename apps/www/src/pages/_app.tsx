@@ -1,5 +1,6 @@
 import '@/styles/globals.css'
 
+import { Analytics } from '@vercel/analytics/react'
 import { type AppType } from 'next/app'
 import { type Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
@@ -12,6 +13,7 @@ const Tulo: AppType<{ session: Session | null }> = ({ Component, pageProps: { se
   return (
     <SessionProvider session={session}>
       <AxiomWebVitals />
+      <Analytics />
       <ThemeProvider>
         <Component {...pageProps} />
       </ThemeProvider>
