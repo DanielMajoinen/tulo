@@ -1,12 +1,10 @@
 'use client'
 
-import MenuFooter from '@/components/menu/MenuFooter'
-import MenuHeader from '@/components/menu/MenuHeader'
-import MenuOptions from '@/components/menu/MenuOptions'
+import { MenuFooter, MenuHeader, MenuOptions } from '@/components/layouts/dashboard/menu'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
-export type DashboardSidebarProps = {
+type DashboardSidebarProps = {
   className?: string
   activePageName?: string
 }

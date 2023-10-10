@@ -5,7 +5,7 @@ import { Link } from '@verdant-web/react-router'
 import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 
-export type MenuHeaderProps = {
+type MenuHeaderProps = {
   activePageName?: string
 }
 

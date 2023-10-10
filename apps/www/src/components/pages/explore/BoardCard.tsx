@@ -1,6 +1,5 @@
 import { useNavigate } from '@verdant-web/react-router'
 import { BadgeCheck } from 'lucide-react'
-import * as React from 'react'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -9,7 +8,7 @@ import { type Board } from '@/types'
 
 type BoardCardProps = Board
 
-const BoardCard: React.FC<BoardCardProps> = (props: BoardCardProps) => {
+export default function BoardCard(props: BoardCardProps) {
   const { id, name, owner, description, tags } = props
   const navigate = useNavigate()
   const isTuloOwned = owner === 'Tulo'
@@ -40,15 +39,15 @@ const BoardCard: React.FC<BoardCardProps> = (props: BoardCardProps) => {
   )
 }
 
-const TuloBadge: React.FC = () => (
-  <Badge>
-    <div className="flex items-center text-sm">
-      <div>Tulo</div>
-      <div>
-        <BadgeCheck className="h-4" />
+function TuloBadge() {
+  return (
+    <Badge>
+      <div className="flex items-center text-sm">
+        <div>Tulo</div>
+        <div>
+          <BadgeCheck className="h-4" />
+        </div>
       </div>
-    </div>
-  </Badge>
-)
-
-export default BoardCard
+    </Badge>
+  )
+}

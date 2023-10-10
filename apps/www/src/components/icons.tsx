@@ -1,8 +1,8 @@
 'use client'
 
-import * as React from 'react'
+import { type HTMLAttributes } from 'react'
 
-export type IconProps = React.HTMLAttributes<SVGElement>
+export type IconProps = HTMLAttributes<SVGElement>
 
 export const Icons = {
   apple: (props: IconProps) => (

@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import BoardCard from '@/components/pages/explore/BoardCard'
 import { type Board } from '@/types'
 
@@ -7,7 +5,7 @@ type ExploreContentProps = {
   boards: Board[]
 }
 
-const ExploreContent: React.FC<ExploreContentProps> = ({ boards }: ExploreContentProps) => {
+export default function ExploreContent({ boards }: ExploreContentProps) {
   return (
     <div className="flex flex-wrap gap-5">
       {boards.map((board) => (
@@ -16,5 +14,3 @@ const ExploreContent: React.FC<ExploreContentProps> = ({ boards }: ExploreConten
     </div>
   )
 }
-
-export default ExploreContent

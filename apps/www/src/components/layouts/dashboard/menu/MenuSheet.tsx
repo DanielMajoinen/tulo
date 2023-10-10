@@ -1,16 +1,15 @@
 'use client'
 
 import { Menu } from 'lucide-react'
-import * as React from 'react'
+import { type ReactNode } from 'react'
 
-import MenuFooter from '@/components/menu/MenuFooter'
-import MenuOptions from '@/components/menu/MenuOptions'
+import { MenuFooter, MenuOptions } from '@/components/layouts/dashboard/menu'
 import { Separator } from '@/components/ui/separator'
 import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 
-export type MenuSheetProps = {
+type MenuSheetProps = {
   activePageName?: string
-  icon?: React.ReactNode
+  icon?: ReactNode
 }
 
 export default function MenuSheet({ icon, activePageName }: MenuSheetProps) {

@@ -1,7 +1,5 @@
-import * as React from 'react'
-
+import { ExistingInputField, InputField } from '@/components/pages/create'
 import { useAllUserInputsByType } from '@/components/pages/create/hooks'
-import { ExistingInputField, InputField } from '@/components/pages/create/index'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { type Board } from '@/types'
@@ -12,11 +10,7 @@ type CreateUserBoardInputsContentProps = {
   onValueChange?: (id: string, value: string) => void
 }
 
-const CreateUserBoardInputsContent: React.FC<CreateUserBoardInputsContentProps> = ({
-  board,
-  values,
-  onValueChange
-}: CreateUserBoardInputsContentProps) => {
+export default function CreateUserBoardInputsContent({ board, values, onValueChange }: CreateUserBoardInputsContentProps) {
   const userInputs = useAllUserInputsByType()
 
   return (
@@ -54,5 +48,3 @@ const CreateUserBoardInputsContent: React.FC<CreateUserBoardInputsContentProps> 
     </>
   )
 }
-
-export default CreateUserBoardInputsContent

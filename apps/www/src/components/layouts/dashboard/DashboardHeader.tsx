@@ -3,10 +3,9 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
 
 import { Icons } from '@/components/icons'
-import MenuHeader from '@/components/menu/MenuHeader'
-import MenuSheet from '@/components/menu/MenuSheet'
+import { MenuHeader, MenuSheet } from '@/components/layouts/dashboard/menu'
 
-export type DashboardHeaderProps = {
+type DashboardHeaderProps = {
   activePageName?: string
 }
 

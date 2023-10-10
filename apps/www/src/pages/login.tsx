@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 import { getProviders, signIn, useSession } from 'next-auth/react'
 
 import { Icons } from '@/components/icons'
-import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
@@ -58,8 +57,8 @@ export default function Login({ providers }: InferGetStaticPropsType<typeof getS
       {/* Login providers */}
       <div className="flex min-h-screen flex-col items-center justify-center">
         <Card>
-          <CardHeader className="space-y-1">
-            <Logo className="justify-center" hideText={true} />
+          <CardHeader className="items-center space-y-1">
+            <Icons.tulo className="h-10" color="#e66b6c" />
           </CardHeader>
           <CardContent className="grid gap-4">
             <Divider />

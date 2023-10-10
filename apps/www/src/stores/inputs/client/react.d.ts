@@ -1,16 +1,7 @@
-import { Context, ComponentType, ReactNode } from 'react'
-import type { Client, ClientDescriptor, Schema, QueryStatus, Input, InputFilter } from './index'
-import type {
-  UserInfo,
-  ObjectEntity,
-  ListEntity,
-  Entity,
-  AccessibleEntityProperty,
-  EntityShape,
-  AnyEntity,
-  EntityDestructured,
-  EntityFile
-} from '@verdant-web/store'
+import type { AnyEntity, EntityDestructured, EntityFile, EntityShape, UserInfo } from '@verdant-web/store'
+import { type ComponentType, type Context, type ReactNode } from 'react'
+
+import type { Client, ClientDescriptor, Input, InputFilter, QueryStatus, Schema } from './index'
 
 type HookConfig<F> = {
   index?: F

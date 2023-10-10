@@ -4,10 +4,10 @@ import { useCallback } from 'react'
 
 import { type Prettify } from '@/types'
 
-import { type InputInit } from './client/index'
+import { type InputInit } from './client'
 import { createHooks } from './client/react'
 
-export { ClientDescriptor } from './client/index'
+export { ClientDescriptor } from './client'
 export { default as migrations } from './migrations'
 
 export default createHooks().withMutations({

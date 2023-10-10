@@ -1,7 +1,7 @@
 import { Cable, Image } from 'lucide-react'
-import * as React from 'react'
+import { useState } from 'react'
 
-import { CreateUserBoardInputsContent, CreateUserBoardPreviewContent } from '@/components/pages/create/index'
+import { CreateUserBoardInputsContent, CreateUserBoardPreviewContent } from '@/components/pages/create'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { type Board } from '@/types'
 
@@ -9,8 +9,8 @@ type CreateUserBoardContentProps = {
   board: Board
 }
 
-const CreateUserBoardContent: React.FC<CreateUserBoardContentProps> = ({ board }: CreateUserBoardContentProps) => {
-  const [inputValues, setInputValues] = React.useState<Record<string, string>>(
+export default function CreateUserBoardContent({ board }: CreateUserBoardContentProps) {
+  const [inputValues, setInputValues] = useState<Record<string, string>>(
     board.inputs.reduce((acc, input) => ({ ...acc, [input.id]: '' }), {})
   )
 
@@ -32,17 +32,17 @@ const CreateUserBoardContent: React.FC<CreateUserBoardContentProps> = ({ board }
   )
 }
 
-const CreateUserBoardTabsList: React.FC = () => (
-  <TabsList className="absolute bottom-5 right-5 min-w-[220px] items-center">
-    <TabsTrigger value="inputs" className="flex gap-2">
-      <Cable />
-      <span>Inputs</span>
-    </TabsTrigger>
-    <TabsTrigger value="preview" className="flex gap-2">
-      <Image />
-      <span>Preview</span>
-    </TabsTrigger>
-  </TabsList>
-)
-
-export default CreateUserBoardContent
+function CreateUserBoardTabsList() {
+  return (
+    <TabsList className="absolute bottom-5 right-5 min-w-[220px] items-center">
+      <TabsTrigger value="inputs" className="flex gap-2">
+        <Cable />
+        <span>Inputs</span>
+      </TabsTrigger>
+      <TabsTrigger value="preview" className="flex gap-2">
+        <Image />
+        <span>Preview</span>
+      </TabsTrigger>
+    </TabsList>
+  )
+}

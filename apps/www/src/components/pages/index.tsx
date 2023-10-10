@@ -4,11 +4,11 @@
 import { makeRoutes, Outlet, Router } from '@verdant-web/react-router'
 import { Suspense } from 'react'
 
-import Create from '@/components/pages/Create'
-import Explore from '@/components/pages/Explore'
+import Create from '@/components/pages/create'
+import Explore from '@/components/pages/explore'
 import InputsProvider from '@/components/providers/InputsProvider'
 
-export default function Index() {
+export function SPA() {
   const routes = makeRoutes([
     {
       component: Explore,
@@ -42,3 +42,5 @@ export default function Index() {
     </Router>
   )
 }
+
+export default SPA

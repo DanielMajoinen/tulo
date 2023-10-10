@@ -2,12 +2,12 @@
 
 import { Link } from '@verdant-web/react-router'
 import { X } from 'lucide-react'
-import * as React from 'react'
+import { type ReactNode } from 'react'
 
 import { Icons } from '@/components/icons'
 
-export type CreateLayoutProps = {
-  children?: React.ReactNode
+type CreateLayoutProps = {
+  children?: ReactNode
 }
 
 export default function CreateLayout({ children }: CreateLayoutProps) {
