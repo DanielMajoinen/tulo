@@ -16,13 +16,15 @@ const boards: Record<string, Board> = {
         id: 'currency',
         name: 'Currency',
         description: 'The currency of the account.',
-        type: 'currency-select'
+        type: 'currency-select',
+        required: true
       },
       {
         id: 'balance',
         name: 'Balance',
         description: 'The current balance of the account.',
-        type: 'currency'
+        type: 'currency',
+        required: true
       }
     ]
   },

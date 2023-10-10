@@ -10,6 +10,7 @@ export type BoardInput = {
   name: string
   description: string
   type: 'text' | 'number' | 'currency' | 'currency-select'
+  required: boolean
 }
 
 /**
