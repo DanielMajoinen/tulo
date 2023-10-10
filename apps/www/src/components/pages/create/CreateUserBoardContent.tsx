@@ -40,6 +40,7 @@ function CreateUserBoardTabsList() {
         <span>Inputs</span>
       </TabsTrigger>
       <TabsTrigger value="preview" className="flex gap-2">
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image />
         <span>Preview</span>
       </TabsTrigger>
