@@ -9,7 +9,7 @@ export type BoardInput = {
   id: string
   name: string
   description: string
-  type: 'text' | 'number' | 'currency' | 'date' | 'switch' | 'currency-select'
+  type: 'text' | 'number' | 'currency' | 'currency-select'
 }
 
 /**
