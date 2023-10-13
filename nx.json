@@ -4,30 +4,12 @@
       "runner": "nx/tasks-runners/default",
       "options": {
         "cacheableOperations": [
-          "build",
           "lint"
         ]
       }
     }
   },
   "targetDefaults": {
-    "build": {
-      "inputs": [
-        "{projectRoot}/public",
-        "{projectRoot}/src",
-        "{projectRoot}/next.config.mjs",
-        "{projectRoot}/package.json",
-        "{projectRoot}/postcss.config.cjs",
-        "{projectRoot}/tailwind.config.ts",
-        "{projectRoot}/tsconfig.json"
-      ],
-      "outputs": [
-        "{projectRoot}/.next"
-      ],
-      "dependsOn": [
-        "^build"
-      ]
-    },
     "lint": {
       "inputs": [
         "{projectRoot}/src"
