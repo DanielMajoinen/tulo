@@ -29,7 +29,7 @@ export default function BoardCard(props: BoardCardProps) {
           <p className="flex-1 text-xs text-muted-foreground">{description}</p>
           {/* Actions */}
           <div className="mt-5 flex flex-none flex-col gap-3">
-            <Button className="w-full" onClick={() => navigate(`/create/${id}`)}>
+            <Button className="w-full" onClick={() => navigate(`/explore/${id}`)}>
               Create
             </Button>
           </div>

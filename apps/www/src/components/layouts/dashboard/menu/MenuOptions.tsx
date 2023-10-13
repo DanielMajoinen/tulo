@@ -31,7 +31,7 @@ type MenuOptionsProps = {
 }
 
 export default function MenuOptions({ activePageName }: MenuOptionsProps) {
-  // TODO: Get options from users boards via TRPC
+  // TODO: Get options from client-side boards db
   const options: MenuOptionProps[] = []
 
   return options.map(({ name, url, ...props }) => (

@@ -14,8 +14,11 @@ export function useAllUserInputsByType() {
   })
 
   const all = allUserInputs.map((userInput) => userInput.getAll())
-
-  return Object.fromEntries(
+  const userInputs = Object.fromEntries(
     [...new Set(all.map(({ type }) => type))].map((type) => [type, all.filter((userInput) => userInput.type === type)])
   )
+
+  return {
+    getUserInputsByType: (type: string) => userInputs[type] ?? []
+  }
 }

@@ -4,6 +4,8 @@
 import { makeRoutes, Outlet, Router } from '@verdant-web/react-router'
 import { Suspense } from 'react'
 
+import { DashboardLayout, ExploreLayout } from '@/components/layouts'
+import Board from '@/components/pages/board'
 import Create from '@/components/pages/create'
 import Explore from '@/components/pages/explore'
 import InputsProvider from '@/components/providers/InputsProvider'
@@ -11,20 +13,36 @@ import InputsProvider from '@/components/providers/InputsProvider'
 export function SPA() {
   const routes = makeRoutes([
     {
-      component: Explore,
-      exact: true,
-      path: '/'
-    },
-    {
-      component: Create,
-      path: '/create',
+      path: '/explore',
+      component: ExploreLayout,
       children: [
         {
-          // match a path parameter and it will be passed
-          // by name to your onAccessible/onVisited callbacks
-          // and returned by useParams()
+          index: true,
+          component: Explore
+        },
+        {
           path: ':id',
           component: Create
+        }
+      ]
+    },
+    {
+      path: '/', // Redirected by middleware to users first board, or the explore page if they have no boards
+      component: DashboardLayout,
+      children: [
+        {
+          component: Board,
+          path: '/board', // Redirected by middleware to users first board
+          children: [
+            {
+              path: ':id',
+              component: Board,
+              onVisited: async ({ id }) => {
+                // TODO: Retrieve board from param
+                console.log(id)
+              }
+            }
+          ]
         }
       ]
     }
@@ -33,7 +51,7 @@ export function SPA() {
   return (
     <Router routes={routes}>
       <main>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense>
           <InputsProvider>
             <Outlet />
           </InputsProvider>
