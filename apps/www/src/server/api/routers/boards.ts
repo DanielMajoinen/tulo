@@ -1,7 +1,7 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 import { z } from 'zod'
 
-import { createTRPCRouter, protectedProcedure } from '@/server/api/trpc'
+import { createTRPCRouter, publicProcedure } from '@/server/api/trpc'
 import { type Board } from '@/types'
 
 const boards: Record<string, Board> = {
@@ -40,11 +40,11 @@ const boards: Record<string, Board> = {
 
 // TODO: Get boards from dedicated microservice
 export const boardsRouter = createTRPCRouter({
-  getAllBoards: protectedProcedure.query(() => {
+  getAllBoards: publicProcedure.query(() => {
     return Object.values(boards)
   }),
 
-  getBoard: protectedProcedure.input(z.object({ id: z.string() })).query(({ input }) => {
+  getBoard: publicProcedure.input(z.object({ id: z.string() })).query(({ input }) => {
     return boards[input.id]
   })
 })
