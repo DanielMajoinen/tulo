@@ -4,7 +4,7 @@ import { type NextRequestWithAuth, withAuth } from 'next-auth/middleware'
 export default withAuth(
   function middleware(req: NextRequestWithAuth) {
     // Redirect authenticated users to home page
-    if (req.nextauth.token && req.nextUrl.pathname === '/login') {
+    if (req.nextauth.token && req.nextUrl.pathname.startsWith('/login')) {
       return NextResponse.redirect(new URL('/', req.url))
     }
 
