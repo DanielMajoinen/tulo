@@ -19,6 +19,7 @@ export function useAllUserInputsByType() {
   )
 
   return {
+    getUserInputValue: <T>(id: string) => all.find((userInput) => userInput.id === id)?.value as T | undefined,
     getUserInputsByType: (type: string) => userInputs[type] ?? []
   }
 }

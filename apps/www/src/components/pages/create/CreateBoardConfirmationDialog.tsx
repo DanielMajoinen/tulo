@@ -9,13 +9,16 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
+import { useAllUserInputsByType } from './hooks'
+
 type CreateBoardConfirmationDialogProps = {
   trigger: ReactNode
   onSave?: () => void
 }
 
 export default function CreateBoardConfirmationDialog({ trigger, onSave }: CreateBoardConfirmationDialogProps) {
-  const { board, inputValue, saveBoard } = useCreateBoardContext()
+  const { board, inputType, inputValue, saveBoard } = useCreateBoardContext()
+  const { getUserInputValue } = useAllUserInputsByType()
   const [name, setName] = useState(board.name)
   const nav = useNavigate()
 
@@ -40,15 +43,16 @@ export default function CreateBoardConfirmationDialog({ trigger, onSave }: Creat
             </Label>
             <Input id="name" defaultValue={name} onChange={(e) => setName(e.target.value)} className="col-span-3" />
           </div>
-          {board.inputs.map((input) => {
-            const value = inputValue.get(input.id)
+          {board.inputs.map(({ id, name }) => {
+            const type = inputType.get(id)
+            const value = inputValue.get(id)
 
             return (
-              <div key={`create-user-board-inputs-${input.id}`} className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor={input.id} className="text-right">
-                  {input.name}
+              <div key={`create-user-board-inputs-${id}`} className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor={id} className="text-right">
+                  {name}
                 </Label>
-                <Input id={input.id} defaultValue={value} className="col-span-3" disabled />
+                <Input id={id} defaultValue={type === 'new' ? value : getUserInputValue(value)} className="col-span-3" disabled />
               </div>
             )
           })}
