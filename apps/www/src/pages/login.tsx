@@ -1,41 +1,57 @@
 'use client'
 
-import { signIn } from 'next-auth/react'
-import { Suspense } from 'react'
+import { Divider } from '@nextui-org/react'
+import type { InferGetStaticPropsType } from 'next'
+import { useRouter } from 'next/navigation'
+import { getProviders, signIn, useSession } from 'next-auth/react'
 
 import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
-import { api } from '@/utils/api'
 
-function LoginProviders() {
-  const { data: providers } = api.loginProviders.getAllLoginProviders.useQuery()
+export const getStaticProps = async () => {
+  const providers = await getProviders()
 
+  return {
+    props: {
+      providers: providers ?? ([] as InferGetStaticPropsType<typeof getProviders>)
+    }
+  }
+}
+
+type LoginProvidersProps = {
+  providers: InferGetStaticPropsType<typeof getStaticProps>['providers']
+}
+
+function LoginProviders({ providers }: LoginProvidersProps) {
   return (
     <>
-      {providers &&
-        Object.values(providers).map((provider) => {
-          const Icon = Icons[provider.name as keyof typeof Icons]
+      {Object.values(providers).map((provider) => {
+        const Icon = Icons[provider.name.toLowerCase() as keyof typeof Icons]
 
-          return (
-            <>
-              <Separator />
-              <div className="grid grid-cols-1 gap-6" key={provider.name}>
-                <Button variant="outline" onClick={() => void signIn(provider.id)}>
-                  {Icon ? <Icon className="mr-2 h-4 w-4" /> : null}
-                  {provider.name}
-                </Button>
-              </div>
-            </>
-          )
-        })}
+        return (
+          <div className="grid grid-cols-1 gap-6" key={provider.name}>
+            <Button variant="outline" onClick={() => void signIn(provider.id)}>
+              {Icon ? <Icon className="mr-2 h-4 w-4" /> : null}
+              {provider.name}
+            </Button>
+          </div>
+        )
+      })}
     </>
   )
 }
 
-export default function Login() {
+export default function Login({ providers }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const session = useSession()
+  const router = useRouter()
+
+  // Redirect authenticated users to the dashboard
+  if (session.status === 'authenticated') {
+    router.push('/')
+  }
+
   return (
     <>
       {/* Login providers */}
@@ -44,11 +60,10 @@ export default function Login() {
           <CardHeader className="items-center space-y-1">
             <Icons.tulo className="h-10" color="#e66b6c" />
           </CardHeader>
-          <Suspense>
-            <CardContent className="grid gap-4">
-              <LoginProviders />
-            </CardContent>
-          </Suspense>
+          <CardContent className="grid gap-4">
+            <Divider />
+            <LoginProviders providers={providers} />
+          </CardContent>
         </Card>
       </div>
       {/* Theme toggle */}
