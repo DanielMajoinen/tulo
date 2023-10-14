@@ -1,7 +1,6 @@
 import { DialogClose } from '@radix-ui/react-dialog'
 import { useNavigate } from '@verdant-web/react-router'
 import { Save } from 'lucide-react'
-import { useSession } from 'next-auth/react'
 import { type ReactNode, useState } from 'react'
 
 import { useCreateBoardContext } from '@/components/providers'
@@ -9,7 +8,6 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import InputHooks from '@/stores/inputs'
 
 type CreateBoardConfirmationDialogProps = {
   trigger: ReactNode
@@ -17,26 +15,13 @@ type CreateBoardConfirmationDialogProps = {
 }
 
 export default function CreateBoardConfirmationDialog({ trigger, onSave }: CreateBoardConfirmationDialogProps) {
-  const { data: session } = useSession()
-  const { board, getInputType, getInputValue } = useCreateBoardContext()
+  const { board, inputValue, saveBoard } = useCreateBoardContext()
   const [name, setName] = useState(board.name)
   const nav = useNavigate()
-  const addInput = InputHooks.useAddInput()
 
   const onClick = () => {
     onSave?.()
-
-    board.inputs
-      .filter((input) => getInputType(input.id) === 'new')
-      .map((input) =>
-        addInput({
-          name,
-          type: input.type,
-          userId: session?.user.id ?? '',
-          value: getInputValue(input.id)
-        })
-      )
-
+    saveBoard(name)
     nav(`/boards/${board.id}`)
   }
 
@@ -56,7 +41,7 @@ export default function CreateBoardConfirmationDialog({ trigger, onSave }: Creat
             <Input id="name" defaultValue={name} onChange={(e) => setName(e.target.value)} className="col-span-3" />
           </div>
           {board.inputs.map((input) => {
-            const value = getInputValue(input.id)
+            const value = inputValue.get(input.id)
 
             return (
               <div key={`create-user-board-inputs-${input.id}`} className="grid grid-cols-4 items-center gap-4">

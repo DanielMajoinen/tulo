@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export default function CreateBoardInputsContent() {
-  const { board, changeInputType, changeInputValue, getInputType, getInputValue } = useCreateBoardContext()
+  const { board, inputType, inputValue } = useCreateBoardContext()
   const { getUserInputsByType } = useAllUserInputsByType()
 
   return (
@@ -13,8 +13,8 @@ export default function CreateBoardInputsContent() {
       {board.inputs.map((input) => {
         const userInputs = getUserInputsByType(input.type)
         const hasExistingInputs = userInputs.length > 0
-        const type = getInputType(input.id)
-        const value = getInputValue(input.id)
+        const type = inputType.get(input.id)
+        const value = inputValue.get(input.id)
 
         return (
           <Card className="w-full" key={`create-board-inputs-${input.id}`}>
@@ -25,27 +25,27 @@ export default function CreateBoardInputsContent() {
             <CardContent>
               <Tabs className="w-full" defaultValue="new">
                 <TabsList>
-                  <TabsTrigger value="new" className="flex gap-2" onClick={() => changeInputType(input.id, 'new')}>
+                  <TabsTrigger value="new" className="flex gap-2" onClick={() => inputType.set(input.id, 'new')}>
                     <span>New</span>
                   </TabsTrigger>
                   <TabsTrigger
                     value="existing"
                     className="flex gap-2"
-                    onClick={() => changeInputType(input.id, 'existing')}
+                    onClick={() => inputType.set(input.id, 'existing')}
                     disabled={!hasExistingInputs}
                   >
                     <span>Existing</span>
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="new">
-                  {type === 'new' && <InputField input={input} value={value} onChange={(value) => changeInputValue(input.id, value)} />}
+                  {type === 'new' && <InputField input={input} value={value} onChange={(value) => inputValue.set(input.id, value)} />}
                 </TabsContent>
                 <TabsContent value="existing">
                   {type === 'existing' && (
                     <ExistingInputSelect
                       defaultValue={value}
                       options={userInputs}
-                      onValueChange={(value) => changeInputValue(input.id, value)}
+                      onValueChange={(value) => inputValue.set(input.id, value)}
                     />
                   )}
                 </TabsContent>
