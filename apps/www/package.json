@@ -7,7 +7,8 @@
     "dev": "next dev",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "schemas": "bun run schema:inputs",
+    "schemas": "bun run schema:inputs && bun run schema:boards",
+    "schema:boards": "verdant --schema src/stores/boards/schema.ts --output src/stores/boards/client --react",
     "schema:inputs": "verdant --schema src/stores/inputs/schema.ts --output src/stores/inputs/client --react",
     "start": "next start"
   },
