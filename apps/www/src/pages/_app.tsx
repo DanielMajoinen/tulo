@@ -13,7 +13,7 @@ const Tulo: AppType<{ session: Session | null }> = ({ Component, pageProps: { se
   return (
     <SessionProvider session={session}>
       <AxiomWebVitals />
-      <Analytics />
+      {process.env.NODE_ENV === 'production' && <Analytics />}
       <ThemeProvider>
         <Component {...pageProps} />
       </ThemeProvider>
