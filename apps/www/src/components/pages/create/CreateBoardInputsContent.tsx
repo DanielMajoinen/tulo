@@ -14,7 +14,6 @@ export default function CreateBoardInputsContent() {
         const userInputs = getUserInputsByType(input.type)
         const hasExistingInputs = userInputs.length > 0
         const type = inputType.get(input.id)
-        const value = inputValue.get(input.id)
 
         return (
           <Card className="w-full" key={`create-board-inputs-${input.id}`}>
@@ -38,11 +37,11 @@ export default function CreateBoardInputsContent() {
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="new">
-                  <InputField input={input} value={value} onChange={(value) => inputValue.set(input.id, value)} />
+                  <InputField input={input} value={inputValue.get(input.id, 'new')} onChange={(value) => inputValue.set(input.id, value)} />
                 </TabsContent>
                 <TabsContent value="existing">
                   <ExistingInputSelect
-                    defaultValue={value}
+                    defaultValue={inputValue.get(input.id, 'existing')}
                     options={userInputs}
                     onValueChange={(value) => inputValue.set(input.id, value)}
                   />

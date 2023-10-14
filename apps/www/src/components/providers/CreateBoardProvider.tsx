@@ -11,7 +11,7 @@ const CreateBoardContext = createContext({
     set: (_inputId: string, _type: 'existing' | 'new') => {}
   },
   inputValue: {
-    get: (_inputId: string) => '' as string,
+    get: (_inputId: string, _type?: 'new' | 'existing') => '' as string,
     set: (_inputId: string, _value: string) => {}
   },
   isInputValid: false,
@@ -45,7 +45,8 @@ export default function CreateBoardProvider({ board, children }: CreateBoardProv
 
   const inputValue = {
     get: useCallback(
-      (inputId: string) => (inputTypes[inputId] === 'new' ? newInputValues[inputId] : existingInputValues[inputId]) ?? ('' as string),
+      (inputId: string, type?: 'new' | 'existing') =>
+        ((type ?? inputTypes[inputId]) === 'new' ? newInputValues[inputId] : existingInputValues[inputId]) ?? ('' as string),
       [inputTypes, newInputValues, existingInputValues]
     ),
     set: (inputId: string, value: string) =>
