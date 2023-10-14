@@ -38,16 +38,14 @@ export default function CreateBoardInputsContent() {
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="new">
-                  {type === 'new' && <InputField input={input} value={value} onChange={(value) => inputValue.set(input.id, value)} />}
+                  <InputField input={input} value={value} onChange={(value) => inputValue.set(input.id, value)} />
                 </TabsContent>
                 <TabsContent value="existing">
-                  {type === 'existing' && (
-                    <ExistingInputSelect
-                      defaultValue={value}
-                      options={userInputs}
-                      onValueChange={(value) => inputValue.set(input.id, value)}
-                    />
-                  )}
+                  <ExistingInputSelect
+                    defaultValue={value}
+                    options={userInputs}
+                    onValueChange={(value) => inputValue.set(input.id, value)}
+                  />
                 </TabsContent>
               </Tabs>
             </CardContent>
