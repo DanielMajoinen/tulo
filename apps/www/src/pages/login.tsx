@@ -20,12 +20,15 @@ function LoginProviders() {
           const Icon = Icons[provider.name as keyof typeof Icons]
 
           return (
-            <div className="grid grid-cols-1 gap-6" key={provider.name}>
-              <Button variant="outline" onClick={() => void signIn(provider.id)}>
-                {Icon ? <Icon className="mr-2 h-4 w-4" /> : null}
-                {provider.name}
-              </Button>
-            </div>
+            <>
+              <Separator />
+              <div className="grid grid-cols-1 gap-6" key={provider.name}>
+                <Button variant="outline" onClick={() => void signIn(provider.id)}>
+                  {Icon ? <Icon className="mr-2 h-4 w-4" /> : null}
+                  {provider.name}
+                </Button>
+              </div>
+            </>
           )
         })}
     </>
@@ -43,7 +46,6 @@ export default function Login() {
           </CardHeader>
           <Suspense>
             <CardContent className="grid gap-4">
-              <Separator />
               <LoginProviders />
             </CardContent>
           </Suspense>
