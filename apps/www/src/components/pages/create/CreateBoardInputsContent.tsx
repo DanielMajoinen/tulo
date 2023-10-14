@@ -23,7 +23,7 @@ export default function CreateBoardInputsContent() {
               <CardDescription>{input.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <Tabs className="w-full" defaultValue="new">
+              <Tabs className="w-full" defaultValue={type}>
                 <TabsList>
                   <TabsTrigger value="new" className="flex gap-2" onClick={() => inputType.set(input.id, 'new')}>
                     <span>New</span>
