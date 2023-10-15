@@ -5,11 +5,12 @@ import { useCreateBoardContext } from '@/components/providers'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export default function CreateUserBoardContent() {
-  const { board, isInputValid } = useCreateBoardContext()
+  const { isInputValid } = useCreateBoardContext()
+
+  // TODO: set page title to board name
 
   return (
     <Tabs className="w-full" defaultValue="inputs">
-      <h1 className="mb-5 text-4xl">{board.name}</h1>
       <TabsContent value="inputs" className="flex w-full flex-col items-center gap-5">
         <CreateBoardInputsContent />
       </TabsContent>

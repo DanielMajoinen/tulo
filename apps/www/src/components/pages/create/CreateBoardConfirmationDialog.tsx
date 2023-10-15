@@ -45,7 +45,7 @@ export default function CreateBoardConfirmationDialog({ trigger, onSave }: Creat
           </div>
           {board.inputs.map(({ id, name }) => {
             const type = inputType.get(id)
-            const value = inputValue.get(id)
+            const value = inputValue.display(id)
 
             return (
               <div key={`create-user-board-inputs-${id}`} className="grid grid-cols-4 items-center gap-4">

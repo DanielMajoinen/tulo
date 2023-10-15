@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export default function CreateBoardInputsContent() {
-  const { board, inputType, inputValue } = useCreateBoardContext()
+  const { board, inputType, inputValue, inputProperties } = useCreateBoardContext()
   const { getUserInputsByType } = useAllUserInputsByType()
 
   return (
@@ -23,10 +23,7 @@ export default function CreateBoardInputsContent() {
             </CardHeader>
             <CardContent>
               <Tabs className="w-full" defaultValue={type}>
-                <TabsList>
-                  <TabsTrigger value="new" className="flex gap-2" onClick={() => inputType.set(input.id, 'new')}>
-                    <span>New</span>
-                  </TabsTrigger>
+                <TabsList className={!hasExistingInputs ? 'hidden' : ''}>
                   <TabsTrigger
                     value="existing"
                     className="flex gap-2"
@@ -35,9 +32,18 @@ export default function CreateBoardInputsContent() {
                   >
                     <span>Existing</span>
                   </TabsTrigger>
+                  <TabsTrigger value="new" className="flex gap-2" onClick={() => inputType.set(input.id, 'new')}>
+                    <span>New</span>
+                  </TabsTrigger>
                 </TabsList>
                 <TabsContent value="new">
-                  <InputField input={input} value={inputValue.get(input.id, 'new')} onChange={(value) => inputValue.set(input.id, value)} />
+                  <InputField
+                    input={input}
+                    value={inputValue.get(input.id, 'new')}
+                    properties={inputProperties.get(input.id, 'new')}
+                    onChange={(value, options) => inputValue.set(input.id, value, options)}
+                    onPropertyChange={(property, value, options) => inputProperties.set(input.id, property, value, options)}
+                  />
                 </TabsContent>
                 <TabsContent value="existing">
                   <ExistingInputSelect

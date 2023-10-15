@@ -14,12 +14,12 @@ export function useAllUserInputsByType() {
   })
 
   const all = allUserInputs.map((userInput) => userInput.getAll())
-  const userInputs = Object.fromEntries(
+  const byType = Object.fromEntries(
     [...new Set(all.map(({ type }) => type))].map((type) => [type, all.filter((userInput) => userInput.type === type)])
   )
 
   return {
-    getUserInputValue: <T>(id: string) => all.find((userInput) => userInput.id === id)?.value as T | undefined,
-    getUserInputsByType: (type: string) => userInputs[type] ?? []
+    getUserInputValue: <T>(inputId: string) => all.find((userInput) => userInput.id === inputId)?.value as T | undefined,
+    getUserInputsByType: (type: string) => byType[type] ?? []
   }
 }

@@ -5,9 +5,9 @@ import { createTRPCRouter, publicProcedure } from '@/server/api/trpc'
 import { type Board } from '@/types'
 
 const boards: Record<string, Board> = {
-  account: {
-    id: 'account',
-    name: 'Account Balance & Transactions',
+  'tansaction-history': {
+    id: 'tansaction-history',
+    name: 'Transaction History',
     description: "Track a bank account, credit card, cash, or investment and it's related transactions over time.",
     owner: 'Tulo',
     tags: ['Essentials'],
@@ -20,11 +20,41 @@ const boards: Record<string, Board> = {
         required: true
       },
       {
-        id: 'balance',
-        name: 'Balance',
-        description: 'The current balance of the account.',
-        type: 'currency',
-        required: true
+        id: 'transactions',
+        name: 'Transactions',
+        description: 'A list of transactions for the account.',
+        required: true,
+        type: 'table',
+        columns: [
+          {
+            id: 'date',
+            name: 'Date',
+            description: 'The date of the transaction.',
+            type: 'text',
+            required: true
+          },
+          {
+            id: 'description',
+            name: 'Description',
+            description: 'A description of the transaction.',
+            type: 'text',
+            required: true
+          },
+          {
+            id: 'debit',
+            name: 'Debit',
+            description: 'The amount of money debited from the account.',
+            type: 'currency',
+            required: true
+          },
+          {
+            id: 'credit',
+            name: 'Credit',
+            description: 'The amount of money credited to the account.',
+            type: 'currency',
+            required: true
+          }
+        ]
       }
     ]
   },

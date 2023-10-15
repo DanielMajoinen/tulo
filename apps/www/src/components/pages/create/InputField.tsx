@@ -1,14 +1,30 @@
+import { CurrencySelect, TableInput } from '@/components/inputs'
 import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { type BoardInput } from '@/types'
 
-type InputFieldProps = {
+export type InputFieldProps = {
   input: BoardInput
   value?: string
-  onChange?: (value: string) => void
+  properties?: Record<string, string>
+  onChange?: (
+    value: string,
+    options?: {
+      isValid?: boolean
+      displayValue?: string
+    }
+  ) => void
+  onPropertyChange?: (
+    property: string,
+    value: string,
+    options?: {
+      isValid?: boolean
+    }
+  ) => void
 }
 
-export default function InputField({ input, value, onChange }: InputFieldProps) {
+export default function InputField(props: InputFieldProps) {
+  const { input, value, onChange } = props
+
   return (
     <>
       {/* Text, Number */}
@@ -19,21 +35,8 @@ export default function InputField({ input, value, onChange }: InputFieldProps) 
       {['currency'].includes(input.type) && (
         <Input type="number" name={input.name} value={value} onChange={(e) => onChange?.(e.target.value)} />
       )}
-      {/* Currency-Select */}
-      {['currency-select'].includes(input.type) && (
-        <Select defaultValue={value} onValueChange={(value) => onChange?.(value)}>
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {['AUD', 'USD'].map((currency) => (
-              <SelectItem key={currency} value={currency}>
-                {currency}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      )}
+      {input.type === 'currency-select' && <CurrencySelect {...props} />}
+      {input.type === 'table' && <TableInput {...props} />}
     </>
   )
 }
