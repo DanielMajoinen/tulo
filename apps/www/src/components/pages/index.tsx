@@ -8,7 +8,7 @@ import { DashboardLayout, ExploreLayout } from '@/components/layouts'
 import Board from '@/components/pages/board'
 import Create from '@/components/pages/create'
 import Explore from '@/components/pages/explore'
-import { BoardsProvider, InputsProvider } from '@/components/providers'
+import { BoardsProvider, FilesProvider, InputsProvider } from '@/components/providers'
 
 export function SPA() {
   const routes = makeRoutes([
@@ -54,7 +54,9 @@ export function SPA() {
         <Suspense>
           <BoardsProvider>
             <InputsProvider>
-              <Outlet />
+              <FilesProvider>
+                <Outlet />
+              </FilesProvider>
             </InputsProvider>
           </BoardsProvider>
         </Suspense>
