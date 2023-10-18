@@ -1,7 +1,7 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 import { z } from 'zod'
 
-import { createTRPCRouter, publicProcedure } from '@/server/api/trpc'
+import { createTRPCRouter, protectedProcedure } from '@/server/api/trpc'
 import { type Board, type Prettify } from '@/types'
 
 type BoardDto = Prettify<Omit<Board, 'id'>>
@@ -70,11 +70,11 @@ const boards: Record<string, BoardDto> = {
 
 // TODO: Get boards from dedicated microservice
 export const boardsRouter = createTRPCRouter({
-  getAllBoards: publicProcedure.query(() => {
+  getAllBoards: protectedProcedure.query(() => {
     return Object.entries(boards).map(([id, board]) => ({ id, ...board }))
   }),
 
-  getBoard: publicProcedure.input(z.object({ id: z.string() })).query(({ input }) => {
+  getBoard: protectedProcedure.input(z.object({ id: z.string() })).query(({ input }) => {
     return boards[input.id]
   })
 })
