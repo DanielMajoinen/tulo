@@ -26,7 +26,7 @@ export default function Create() {
   return (
     <>
       {board && (
-        <CreateBoardProvider board={board}>
+        <CreateBoardProvider board={{ id: params.id!, ...board }}>
           <CreateBoardContent />
         </CreateBoardProvider>
       )}
