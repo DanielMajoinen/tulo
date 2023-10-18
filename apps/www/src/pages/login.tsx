@@ -1,33 +1,23 @@
 'use client'
 
 import { Divider } from '@nextui-org/react'
-import type { InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/navigation'
-import { getProviders, signIn, useSession } from 'next-auth/react'
+import { type ClientSafeProvider, signIn, useSession } from 'next-auth/react'
 
 import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
-
-export const getStaticProps = async () => {
-  const providers = await getProviders()
-
-  return {
-    props: {
-      providers: providers ?? ([] as InferGetStaticPropsType<typeof getProviders>)
-    }
-  }
-}
+import { api } from '@/utils/api'
 
 type LoginProvidersProps = {
-  providers: InferGetStaticPropsType<typeof getStaticProps>['providers']
+  providers: ClientSafeProvider[]
 }
 
 function LoginProviders({ providers }: LoginProvidersProps) {
-  return (
+  return providers.length ? (
     <>
-      {Object.values(providers).map((provider) => {
+      {providers.map((provider) => {
         const Icon = Icons[provider.name.toLowerCase() as keyof typeof Icons]
 
         return (
@@ -40,10 +30,11 @@ function LoginProviders({ providers }: LoginProvidersProps) {
         )
       })}
     </>
-  )
+  ) : null
 }
 
-export default function Login({ providers }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Login() {
+  const { data: providers } = api.loginProviders.all.useQuery()
   const session = useSession()
   const router = useRouter()
 
@@ -52,7 +43,7 @@ export default function Login({ providers }: InferGetStaticPropsType<typeof getS
     router.push('/')
   }
 
-  return (
+  return providers ? (
     <>
       {/* Login providers */}
       <div className="flex min-h-screen flex-col items-center justify-center">
@@ -62,7 +53,7 @@ export default function Login({ providers }: InferGetStaticPropsType<typeof getS
           </CardHeader>
           <CardContent className="grid gap-4">
             <Divider />
-            <LoginProviders providers={providers} />
+            <LoginProviders providers={Object.values(providers ?? {})} />
           </CardContent>
         </Card>
       </div>
@@ -71,5 +62,5 @@ export default function Login({ providers }: InferGetStaticPropsType<typeof getS
         <ThemeToggle />
       </div>
     </>
-  )
+  ) : null
 }
