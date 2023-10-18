@@ -10,6 +10,9 @@ import { Card, CardContent } from '@/components/ui/card'
 export default function CreateBoardPreviewContent() {
   const { isInputValid } = useCreateBoardContext()
   const [isSaving, setIsSaving] = useState(false)
+  const onSave = () => {
+    setIsSaving(true)
+  }
 
   return (
     <>
@@ -20,7 +23,6 @@ export default function CreateBoardPreviewContent() {
       </Card>
       {/* Save button dialog */}
       <CreateBoardConfirmationDialog
-        onSave={() => setIsSaving(true)}
         trigger={
           <Button className="fixed bottom-20 right-5 flex min-w-[220px] gap-2" disabled={!isInputValid || isSaving}>
             {isSaving ? (
@@ -33,6 +35,7 @@ export default function CreateBoardPreviewContent() {
             )}
           </Button>
         }
+        onSave={onSave}
       />
     </>
   )

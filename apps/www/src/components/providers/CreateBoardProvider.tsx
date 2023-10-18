@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react'
 import { createContext, type ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 
 import BoardHooks from '@/stores/boards'
@@ -32,39 +33,62 @@ export function useCreateBoardContext() {
   return context
 }
 
-type CreateBoardProviderProps = {
-  children: ReactNode
+type InputType = {
+  get: (inputId: string) => 'new' | 'existing'
+  set: (inputId: string, type: 'existing' | 'new') => void
+}
+
+type UseInputTypesProps = {
   board: Board
 }
 
-export default function CreateBoardProvider({ board, children }: CreateBoardProviderProps) {
+function useInputTypes({ board }: UseInputTypesProps) {
+  const [inputTypes, setInputTypes] = useState(Object.fromEntries(board.inputs.map(({ id }) => [id, 'new' as 'new' | 'existing'])))
+
+  const inputType: InputType = {
+    get: useCallback((inputId: string) => inputTypes[inputId] ?? 'new', [inputTypes]),
+    set: (inputId: string, type: 'existing' | 'new') => setInputTypes({ ...inputTypes, [inputId]: type })
+  }
+
+  return {
+    inputType
+  }
+}
+
+type InputProperties = {
+  get: (inputId: string, type?: 'new' | 'existing') => Record<string, string>
+  isValid: (inputId: string, type?: 'new' | 'existing') => boolean
+  set: (inputId: string, property: string, value: string, options?: { isValid?: boolean }) => void
+}
+
+type UseInputPropertiesProps = {
+  inputType: InputType
+}
+
+function useInputProperties({ inputType }: UseInputPropertiesProps) {
+  const { get: getInputType } = inputType
+
   const [newInputProperties, setNewInputProperties] = useState({} as Record<string, Record<string, string>>)
   const [existingInputProperties, setExistingInputProperties] = useState({} as Record<string, Record<string, string>>)
 
   const [newInputPropertyValidity, setNewInputPropertyValidity] = useState({} as Record<string, Record<string, boolean>>)
   const [existingInputPropertyValidity, setExistingInputPropertyValidity] = useState({} as Record<string, Record<string, boolean>>)
 
-  const [newInputValues, setNewInputValues] = useState({} as Record<string, string>)
-  const [existingInputValues, setExistingInputValues] = useState({} as Record<string, string>)
-
-  const [newInputDisplayValues, setNewInputDisplayValues] = useState({} as Record<string, string>)
-  const [existingInputDisplayValues, setExistingInputDisplayValues] = useState({} as Record<string, string>)
-
-  const [newInputValidity, setNewInputValidity] = useState({} as Record<string, boolean>)
-  const [existingInputValidity, setExistingInputValidity] = useState({} as Record<string, boolean>)
-
-  const [isInputValid, setIsInputValid] = useState(false)
-
-  const [inputTypes, setInputTypes] = useState(Object.fromEntries(board.inputs.map(({ id }) => [id, 'new' as 'new' | 'existing'])))
-
-  const inputProperties = {
+  const inputProperties: InputProperties = {
     get: useCallback(
       (inputId: string, type?: 'new' | 'existing') =>
-        ((type ?? inputTypes[inputId]) === 'new' ? newInputProperties[inputId] : existingInputProperties[inputId]) ?? {},
-      [existingInputProperties, inputTypes, newInputProperties]
+        ((type ?? getInputType(inputId)) === 'new' ? newInputProperties[inputId] : existingInputProperties[inputId]) ?? {},
+      [existingInputProperties, getInputType, newInputProperties]
+    ),
+    isValid: useCallback(
+      (inputId: string, type?: 'new' | 'existing') =>
+        Object.values(
+          ((type ?? getInputType(inputId)) === 'new' ? newInputPropertyValidity[inputId] : existingInputPropertyValidity[inputId]) ?? {}
+        ).every((value) => value),
+      [existingInputPropertyValidity, getInputType, newInputPropertyValidity]
     ),
     set: (inputId: string, property: string, value: string, options?: { isValid?: boolean }) => {
-      const isNewInput = inputTypes[inputId] === 'new'
+      const isNewInput = getInputType(inputId) === 'new'
 
       // Set property validity
       isNewInput
@@ -84,24 +108,53 @@ export default function CreateBoardProvider({ board, children }: CreateBoardProv
     }
   }
 
-  const inputType = {
-    get: useCallback((inputId: string) => inputTypes[inputId] ?? 'new', [inputTypes]),
-    set: (inputId: string, type: 'existing' | 'new') => setInputTypes({ ...inputTypes, [inputId]: type })
+  return {
+    inputProperties
   }
+}
 
-  const inputValue = {
+type InputValue = {
+  display: (inputId: string, type?: 'new' | 'existing') => string
+  get: (inputId: string, type?: 'new' | 'existing') => string
+  isValid: (inputId: string, type?: 'new' | 'existing') => boolean
+  set: (inputId: string, value: string, options?: { displayValue?: string; isValid?: boolean }) => void
+}
+
+type UseInputValuesProps = {
+  inputType: InputType
+}
+
+function useInputValues({ inputType }: UseInputValuesProps) {
+  const { get: getInputType } = inputType
+
+  const [newInputValues, setNewInputValues] = useState({} as Record<string, string>)
+  const [existingInputValues, setExistingInputValues] = useState({} as Record<string, string>)
+
+  const [newInputDisplayValues, setNewInputDisplayValues] = useState({} as Record<string, string>)
+  const [existingInputDisplayValues, setExistingInputDisplayValues] = useState({} as Record<string, string>)
+
+  const [newInputValidity, setNewInputValidity] = useState({} as Record<string, boolean>)
+  const [existingInputValidity, setExistingInputValidity] = useState({} as Record<string, boolean>)
+
+  const inputValue: InputValue = {
     display: useCallback(
       (inputId: string, type?: 'new' | 'existing') =>
-        ((type ?? inputTypes[inputId]) === 'new' ? newInputDisplayValues[inputId] : existingInputDisplayValues[inputId]) ?? ('' as string),
-      [inputTypes, newInputDisplayValues, existingInputDisplayValues]
+        ((type ?? getInputType(inputId)) === 'new' ? newInputDisplayValues[inputId] : existingInputDisplayValues[inputId]) ??
+        ('' as string),
+      [getInputType, newInputDisplayValues, existingInputDisplayValues]
     ),
     get: useCallback(
       (inputId: string, type?: 'new' | 'existing') =>
-        ((type ?? inputTypes[inputId]) === 'new' ? newInputValues[inputId] : existingInputValues[inputId]) ?? ('' as string),
-      [inputTypes, newInputValues, existingInputValues]
+        ((type ?? getInputType(inputId)) === 'new' ? newInputValues[inputId] : existingInputValues[inputId]) ?? ('' as string),
+      [getInputType, newInputValues, existingInputValues]
+    ),
+    isValid: useCallback(
+      (inputId: string, type?: 'new' | 'existing') =>
+        ((type ?? getInputType(inputId)) === 'new' ? newInputValidity[inputId] : existingInputValidity[inputId]) ?? true,
+      [existingInputValidity, getInputType, newInputValidity]
     ),
     set: (inputId: string, value: string, options?: { displayValue?: string; isValid?: boolean }) => {
-      const isNewInput = inputTypes[inputId] === 'new'
+      const isNewInput = getInputType(inputId) === 'new'
       const isValid = options?.isValid ?? value !== ''
 
       // Set validity
@@ -121,43 +174,87 @@ export default function CreateBoardProvider({ board, children }: CreateBoardProv
     }
   }
 
-  const { get: getInputValue } = inputValue
-
-  const db = {
-    addBoard: BoardHooks.useAddBoard(),
-    addInput: InputHooks.useAddInput()
+  return {
+    inputValue
   }
+}
 
-  const saveBoard = (name: string) => {
-    board.inputs
-      .filter((input) => inputType.get(input.id) === 'new')
-      .map((input) =>
-        db.addInput({
-          name,
-          type: input.type,
-          value: getInputValue(input.id)
+type UseSaveBoardProps = {
+  board: Board
+  inputType: InputType
+  inputValue: InputValue
+  inputProperties: InputProperties
+}
+
+function useSaveBoard({ board, inputType, inputValue, inputProperties }: UseSaveBoardProps) {
+  const { boards, batch: boardsBatchFactory } = BoardHooks.useClient()
+  const { inputs, batch: inputsBatchFactory } = InputHooks.useClient()
+  const { data: session } = useSession()
+
+  return {
+    saveBoard: (name: string): void => {
+      const boardsBatch = boardsBatchFactory({ undoable: true })
+      const inputsBatch = inputsBatchFactory({ undoable: true })
+
+      try {
+        inputsBatch.run(() => {
+          board.inputs
+            .filter((input) => inputType.get(input.id) === 'new')
+            .map((input) =>
+              inputs.put({
+                displayValue: inputValue.display(input.id),
+                name: input.name,
+                type: input.type,
+                userId: session?.user?.id ?? '',
+                value: inputValue.get(input.id)
+              })
+            )
         })
-      )
 
-    db.addBoard({
-      inputs: Object.fromEntries(board.inputs.map(({ id }) => [id, getInputValue(id)])),
-      name
-    })
+        boardsBatch.run(() => {
+          boards.put({
+            inputs: board.inputs.map((input) => ({
+              id: input.id,
+              properties: inputProperties.get(input.id)
+            })),
+            name,
+            userId: session?.user?.id ?? ''
+          })
+        })
+
+        boardsBatch.flush()
+        inputsBatch.flush()
+      } catch (error) {
+        boardsBatch.discard()
+        inputsBatch.discard()
+      }
+    }
   }
+}
 
-  const { get: getInputType } = inputType
+type CreateBoardProviderProps = {
+  children: ReactNode
+  board: Board
+}
+
+export default function CreateBoardProvider({ board, children }: CreateBoardProviderProps) {
+  const { inputType } = useInputTypes({ board })
+  const { inputProperties } = useInputProperties({ inputType })
+  const { inputValue } = useInputValues({ inputType })
+  const { saveBoard } = useSaveBoard({ board, inputProperties, inputType, inputValue })
+
+  const [isInputValid, setIsInputValid] = useState(false)
 
   useEffect(() => {
     setIsInputValid(
       board.inputs
         .filter(({ required }) => required)
-        .every(({ id }) =>
-          getInputType(id) === 'new'
-            ? newInputValidity[id] && Object.values(newInputPropertyValidity[id] ?? {}).every((value) => value)
-            : existingInputValidity[id] && Object.values(existingInputPropertyValidity[id] ?? {}).every((value) => value)
-        )
+        .every(({ id }) => {
+          const type = inputType.get(id)
+          return inputValue.isValid(id, type) && inputProperties.isValid(id, type)
+        })
     )
-  }, [board, existingInputValidity, existingInputPropertyValidity, getInputType, newInputValidity, newInputPropertyValidity])
+  }, [board, inputProperties, inputType, inputValue])
 
   return (
     <CreateBoardContext.Provider

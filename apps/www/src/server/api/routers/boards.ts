@@ -2,11 +2,12 @@
 import { z } from 'zod'
 
 import { createTRPCRouter, publicProcedure } from '@/server/api/trpc'
-import { type Board } from '@/types'
+import { type Board, type Prettify } from '@/types'
 
-const boards: Record<string, Board> = {
+type BoardDto = Prettify<Omit<Board, 'id'>>
+
+const boards: Record<string, BoardDto> = {
   'tansaction-history': {
-    id: 'tansaction-history',
     name: 'Transaction History',
     description: "Track a bank account, credit card, cash, or investment and it's related transactions over time.",
     owner: 'Tulo',
@@ -25,7 +26,7 @@ const boards: Record<string, Board> = {
         description: 'A list of transactions for the account.',
         required: true,
         type: 'table',
-        columns: [
+        properties: [
           {
             id: 'date',
             name: 'Date',
@@ -59,7 +60,6 @@ const boards: Record<string, Board> = {
     ]
   },
   loans: {
-    id: 'loans',
     name: 'Loans & Repayments',
     description: "Track your home loans, car loans, student loans, or any other type of loan and it's related repayments over time.",
     owner: 'Tulo',
@@ -71,7 +71,7 @@ const boards: Record<string, Board> = {
 // TODO: Get boards from dedicated microservice
 export const boardsRouter = createTRPCRouter({
   getAllBoards: publicProcedure.query(() => {
-    return Object.values(boards)
+    return Object.entries(boards).map(([id, board]) => ({ id, ...board }))
   }),
 
   getBoard: publicProcedure.input(z.object({ id: z.string() })).query(({ input }) => {

@@ -20,10 +20,22 @@ const boards = collection({
             unique: false
         },
         inputs: {
-            type: 'map',
-            values: {
-                type: 'string',
-                unique: false
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    id: {
+                        type: 'string'
+                    },
+                    properties: {
+                        indexed: false,
+                        type: 'map',
+                        unique: false,
+                        values: {
+                            type: 'string'
+                        }
+                    }
+                }
             }
         }
     },

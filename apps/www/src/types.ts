@@ -24,7 +24,7 @@ export type BoardInput = {
     }
   | {
       type: 'table'
-      columns: BoardInputColumn[]
+      properties: BoardInputColumn[]
     }
 )
 

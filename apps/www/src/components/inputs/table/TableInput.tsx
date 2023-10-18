@@ -25,7 +25,7 @@ export default function TableInput({ input, value: id, properties, onChange, onP
   const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     storeFile(event, (file) => onChange?.(file.id, { displayValue: file.filename }))
     // Reset column properties
-    input.columns.forEach((column) => column.required && onPropertyChange?.(column.id, '', { isValid: false }))
+    input.properties.forEach((column) => column.required && onPropertyChange?.(column.id, '', { isValid: false }))
   }
 
   /**
@@ -51,7 +51,7 @@ export default function TableInput({ input, value: id, properties, onChange, onP
         <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-semibold">Column Selection</h2>
           <p className="mb-4 text-sm text-muted-foreground">Select the columns that best apply.</p>
-          {input.columns.map((column) => (
+          {input.properties.map((column) => (
             <div key={`table-input-column-${column.id}`} className="flex flex-col gap-2">
               <div className="flex gap-2">
                 <div className="flex min-w-[120px] flex-none items-center rounded px-3 text-left">

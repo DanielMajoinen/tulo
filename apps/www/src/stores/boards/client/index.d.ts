@@ -1,15 +1,15 @@
+import type schema from './schema'
 import type { StorageSchema } from '@verdant-web/common'
 import type {
   Client as Storage,
   ClientDescriptorOptions as StorageInitOptions,
-  CollectionQueries,
   ObjectEntity,
+  ListEntity,
   Query,
-  ServerSync
+  ServerSync,
+  EntityFile,
+  CollectionQueries
 } from '@verdant-web/store'
-
-import type schema from './schema'
-
 export * from '@verdant-web/store'
 export type Schema = typeof schema
 
@@ -149,13 +149,38 @@ export type BoardName = string
 export type BoardNameInit = BoardName
 export type BoardNameSnapshot = BoardName
 export type BoardNameDestructured = BoardName
-export type BoardInputs = ObjectEntity<BoardInputsInit, BoardInputsDestructured, BoardInputsSnapshot>
-export type BoardInputsInit = Record<string, BoardInputsValueInit>
-export type BoardInputsDestructured = {
-  [key: string]: BoardInputsValue | undefined
+export type BoardInputs = ListEntity<BoardInputsInit, BoardInputsDestructured, BoardInputsSnapshot>
+export type BoardInputsInit = Array<BoardInputsItemInit>
+export type BoardInputsDestructured = Array<BoardInputsItem>
+export type BoardInputsSnapshot = Array<BoardInputsItemSnapshot>
+export type BoardInputsItem = ObjectEntity<BoardInputsItemInit, BoardInputsItemDestructured, BoardInputsItemSnapshot>
+export type BoardInputsItemInit = {
+  id: string
+  properties?: BoardInputsItemPropertiesInit
 }
-export type BoardInputsSnapshot = Record<string, BoardInputsValueSnapshot>
-export type BoardInputsValue = string
-export type BoardInputsValueInit = BoardInputsValue
-export type BoardInputsValueSnapshot = BoardInputsValue
-export type BoardInputsValueDestructured = BoardInputsValue
+export type BoardInputsItemDestructured = {
+  id: string
+  properties: BoardInputsItemProperties
+}
+export type BoardInputsItemSnapshot = {
+  id: string
+  properties: BoardInputsItemPropertiesSnapshot
+}
+export type BoardInputsItemId = string
+export type BoardInputsItemIdInit = BoardInputsItemId
+export type BoardInputsItemIdSnapshot = BoardInputsItemId
+export type BoardInputsItemIdDestructured = BoardInputsItemId
+export type BoardInputsItemProperties = ObjectEntity<
+  BoardInputsItemPropertiesInit,
+  BoardInputsItemPropertiesDestructured,
+  BoardInputsItemPropertiesSnapshot
+>
+export type BoardInputsItemPropertiesInit = Record<string, BoardInputsItemPropertiesValueInit>
+export type BoardInputsItemPropertiesDestructured = {
+  [key: string]: BoardInputsItemPropertiesValue | undefined
+}
+export type BoardInputsItemPropertiesSnapshot = Record<string, BoardInputsItemPropertiesValueSnapshot>
+export type BoardInputsItemPropertiesValue = string
+export type BoardInputsItemPropertiesValueInit = BoardInputsItemPropertiesValue
+export type BoardInputsItemPropertiesValueSnapshot = BoardInputsItemPropertiesValue
+export type BoardInputsItemPropertiesValueDestructured = BoardInputsItemPropertiesValue

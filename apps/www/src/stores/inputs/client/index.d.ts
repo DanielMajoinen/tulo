@@ -130,16 +130,6 @@ export interface InputTypeStartsWithFilter {
   startsWith: string
   order?: 'asc' | 'desc'
 }
-
-export interface InputUserInputsCompoundFilter {
-  where: 'user_inputs'
-  match: {
-    userId?: string
-    type?: string
-  }
-  order: 'asc' | 'desc'
-}
-
 export type InputFilter =
   | InputIdMatchFilter
   | InputIdRangeFilter
@@ -150,34 +140,30 @@ export type InputFilter =
   | InputTypeMatchFilter
   | InputTypeRangeFilter
   | InputTypeStartsWithFilter
-  | InputUserInputsCompoundFilter
 
 export type InputDestructured = {
   id: string
   userId: string
   name: string
   type: string
-  value: any
-  file: InputFile
-  properties: any
+  value: string
+  displayValue: string
 }
 export type InputInit = {
   id?: string
   userId: string
   name: string
   type: string
-  value?: any
-  file?: InputFileInit
-  properties?: any
+  value?: string
+  displayValue?: string
 }
 export type InputSnapshot = {
   id: string
   userId: string
   name: string
   type: string
-  value: any
-  file: InputFileSnapshot
-  properties: any
+  value: string
+  displayValue: string
 }
 /** Input sub-object types */
 
@@ -197,15 +183,11 @@ export type InputType = string
 export type InputTypeInit = InputType
 export type InputTypeSnapshot = InputType
 export type InputTypeDestructured = InputType
-export type InputValue = any
+export type InputValue = string
 export type InputValueInit = InputValue | undefined
 export type InputValueSnapshot = InputValue
 export type InputValueDestructured = InputValue
-export type InputFile = EntityFile
-export type InputFileInit = File
-export type InputFileDestructured = EntityFile
-export type InputFileSnapshot = string
-export type InputProperties = any
-export type InputPropertiesInit = InputProperties | undefined
-export type InputPropertiesSnapshot = InputProperties
-export type InputPropertiesDestructured = InputProperties
+export type InputDisplayValue = string
+export type InputDisplayValueInit = InputDisplayValue | undefined
+export type InputDisplayValueSnapshot = InputDisplayValue
+export type InputDisplayValueDestructured = InputDisplayValue

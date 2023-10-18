@@ -1,14 +1,7 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */ import { collection, schema } from '@verdant-web/store';
 import { v4 as uuid } from 'uuid';
 const inputs = collection({
-    compounds: {
-        user_inputs: {
-            of: [
-                'userId',
-                'type'
-            ]
-        }
-    },
+    compounds: {},
     fields: {
         id: {
             default: ()=>uuid(),
@@ -34,19 +27,13 @@ const inputs = collection({
         value: {
             default: '',
             indexed: false,
-            type: 'any',
+            type: 'string',
             unique: false
         },
-        file: {
-            default: undefined,
+        displayValue: {
+            default: '',
             indexed: false,
-            type: 'file',
-            unique: false
-        },
-        properties: {
-            default: {},
-            indexed: false,
-            type: 'any',
+            type: 'string',
             unique: false
         }
     },
