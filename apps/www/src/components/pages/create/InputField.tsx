@@ -1,9 +1,9 @@
 import { CurrencySelect, TableInput } from '@/components/inputs'
 import { Input } from '@/components/ui/input'
-import { type BoardInput } from '@/types'
+import { type BoardInputDefinition } from '@/types'
 
 export type InputFieldProps = {
-  input: BoardInput
+  input: BoardInputDefinition
   value?: string
   properties?: Record<string, string>
   onChange?: (

@@ -3,10 +3,10 @@ import { createContext, type ReactNode, useCallback, useContext, useEffect, useS
 
 import BoardHooks from '@/stores/boards'
 import InputHooks from '@/stores/inputs'
-import { type Board } from '@/types'
+import { type BoardDefinition } from '@/types'
 
 const CreateBoardContext = createContext({
-  board: {} as Board,
+  board: {} as BoardDefinition,
   inputProperties: {
     get: (_inputId: string, _type?: 'new' | 'existing') => ({}) as Record<string, string>,
     set: (_inputId: string, _property: string, _value: string, _options?: { isValid?: boolean }) => {}
@@ -39,7 +39,7 @@ type InputType = {
 }
 
 type UseInputTypesProps = {
-  board: Board
+  board: BoardDefinition
 }
 
 function useInputTypes({ board }: UseInputTypesProps) {
@@ -180,7 +180,7 @@ function useInputValues({ inputType }: UseInputValuesProps) {
 }
 
 type UseSaveBoardProps = {
-  board: Board
+  board: BoardDefinition
   inputType: InputType
   inputValue: InputValue
   inputProperties: InputProperties
@@ -234,7 +234,7 @@ function useSaveBoard({ board, inputType, inputValue, inputProperties }: UseSave
 
 type CreateBoardProviderProps = {
   children: ReactNode
-  board: Board
+  board: BoardDefinition
 }
 
 export default function CreateBoardProvider({ board, children }: CreateBoardProviderProps) {

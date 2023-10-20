@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { type BoardInputColumn } from '@/types'
+import { type BoardInputColumnDefinition } from '@/types'
 
 import { useFile } from './hooks'
 
@@ -31,7 +31,7 @@ export default function TableInput({ input, value: id, properties, onChange, onP
   /**
    * Update the columns property value by calling the onPropertyChange callback and set the column validity if required.
    */
-  const onColumnChange = (column: BoardInputColumn, value: string) => {
+  const onColumnChange = (column: BoardInputColumnDefinition, value: string) => {
     onPropertyChange?.(column.id, value, { isValid: !column.required || value !== '' })
   }
 

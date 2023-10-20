@@ -4,9 +4,9 @@ import { BadgeCheck } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { type Board } from '@/types'
+import { type BoardDefinition } from '@/types'
 
-type BoardCardProps = Board
+type BoardCardProps = BoardDefinition
 
 export default function BoardCard(props: BoardCardProps) {
   const { id, name, owner, description, tags } = props
@@ -14,7 +14,7 @@ export default function BoardCard(props: BoardCardProps) {
   const isTuloOwned = owner === 'Tulo'
 
   return (
-    <Card className="flex max-h-[50%] w-full flex-col md:w-auto md:max-w-[calc(50%-10px)] lg:max-w-[calc(33%-10px)]">
+    <Card className="flex max-h-[50%] w-full flex-col md:min-w-[600px] md:max-w-[calc(50%-10px)] lg:max-w-[calc(33%-10px)]">
       <CardHeader className="flex-none pb-3">
         <CardTitle className="text-2xl font-bold">{name}</CardTitle>
       </CardHeader>

@@ -1,8 +1,8 @@
 import BoardCard from '@/components/pages/explore/BoardCard'
-import { type Board } from '@/types'
+import { type BoardDefinition } from '@/types'
 
 type ExploreContentProps = {
-  boards: Board[]
+  boards: BoardDefinition[]
 }
 
 export default function ExploreContent({ boards }: ExploreContentProps) {
