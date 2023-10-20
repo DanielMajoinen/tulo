@@ -2,7 +2,7 @@
 
 import { type ReactNode } from 'react'
 
-import Store, { ClientDescriptor, migrations } from '@/stores/boards'
+import { BoardHooks, ClientDescriptor, migrations } from '@/stores/boards'
 
 export default function Provider({ children }: { children: ReactNode }) {
   const clientDescriptor = new ClientDescriptor({
@@ -10,5 +10,5 @@ export default function Provider({ children }: { children: ReactNode }) {
     namespace: 'boards'
   })
 
-  return <Store.Provider value={clientDescriptor}>{children}</Store.Provider>
+  return <BoardHooks.Provider value={clientDescriptor}>{children}</BoardHooks.Provider>
 }

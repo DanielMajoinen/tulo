@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react'
 import { createContext, type ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 
-import BoardHooks from '@/stores/boards'
+import { BoardHooks } from '@/stores/boards'
 import InputHooks from '@/stores/inputs'
 import { type BoardDefinition } from '@/types'
 

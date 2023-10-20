@@ -1,2 +1,2 @@
 export * from './hooks'
-export { default } from './hooks'
+export { default as BoardHooks } from './hooks'
