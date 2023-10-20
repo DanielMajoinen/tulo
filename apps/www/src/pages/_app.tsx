@@ -12,7 +12,7 @@ import { api } from '@/utils/api'
 const Tulo: AppType<{ session: Session | null }> = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <SessionProvider session={session}>
-      <AxiomWebVitals />
+      {process.env.NODE_ENV === 'production' && <AxiomWebVitals />}
       {process.env.NODE_ENV === 'production' && <Analytics />}
       <ThemeProvider>
         <Component {...pageProps} />
