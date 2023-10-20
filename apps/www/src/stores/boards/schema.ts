@@ -30,11 +30,17 @@ const boards = collection({
             type: 'string'
           },
           properties: {
-            indexed: false,
-            type: 'map',
-            unique: false,
-            values: {
-              type: 'string'
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'string'
+                },
+                value: {
+                  type: 'string'
+                }
+              }
             }
           }
         }

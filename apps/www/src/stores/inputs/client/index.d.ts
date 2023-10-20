@@ -1,16 +1,15 @@
-import type schema from './schema'
 import type { StorageSchema } from '@verdant-web/common'
 import type {
   Client as Storage,
   ClientDescriptorOptions as StorageInitOptions,
+  CollectionQueries,
   ObjectEntity,
-  ListEntity,
   Query,
-  ServerSync,
-  EntityFile,
-  CollectionQueries
+  ServerSync
 } from '@verdant-web/store'
-export * from '@verdant-web/store'
+
+import type schema from './schema'
+
 export type Schema = typeof schema
 
 interface Collection<Document extends ObjectEntity<any, any>, Snapshot, Init, Filter> {

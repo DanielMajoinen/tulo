@@ -1,16 +1,7 @@
-import { Context, ComponentType, ReactNode } from 'react'
-import type { Client, ClientDescriptor, Schema, QueryStatus, Input, InputFilter } from './index'
-import type {
-  UserInfo,
-  ObjectEntity,
-  ListEntity,
-  Entity,
-  AccessibleEntityProperty,
-  EntityShape,
-  AnyEntity,
-  EntityDestructured,
-  EntityFile
-} from '@verdant-web/store'
+import type { AnyEntity, EntityDestructured, EntityFile, EntityShape, UserInfo } from '@verdant-web/store'
+import { type ComponentType, type Context, type ReactNode } from 'react'
+
+import type { Client, ClientDescriptor, Input, InputFilter, QueryStatus, Schema } from './index'
 
 type HookConfig<F> = {
   index?: F
@@ -97,7 +88,9 @@ export interface GeneratedHooks<Presence, Profile> {
 }
 
 type HookName = `use${string}`
-type HookWithoutClient<Hook extends <TArgs extends any[], TRet>(client: Client, ...args: Targs) => TRet> = (...args: TArgs) => TRet
+type HookWithoutClient<Hook extends <TArgs extends any[], TRet>(client: Client, ...args: TArgs) => TRet> = (
+  ...args: any[]
+) => ReturnType<Hook>
 export function createHooks<
   Presence = any,
   Profile = any,
