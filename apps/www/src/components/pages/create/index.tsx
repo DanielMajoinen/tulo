@@ -21,7 +21,7 @@ export {
 export default function Create() {
   const params = useParams()
 
-  const { data: board } = api.boards.getBoard.useQuery({ id: params.id! })
+  const { data: board } = api.boards.get.useQuery({ id: params.id! })
 
   return (
     <>

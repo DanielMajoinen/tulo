@@ -1,0 +1,1 @@
+export { TransactionHistoryBoard } from './board'

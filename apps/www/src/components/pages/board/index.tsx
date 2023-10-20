@@ -11,7 +11,7 @@ export default function Board() {
     router.back()
   }
 
-  const board = api.boards.getBoard.useQuery({ id: params.id! })
+  const board = api.boards.get.useQuery({ id: params.id! })
 
   return <>{board.data && <p>{board.data.name}</p>}</>
 }
