@@ -2,7 +2,7 @@
 
 import { type ReactNode } from 'react'
 
-import Store, { ClientDescriptor, migrations } from '@/stores/files'
+import { ClientDescriptor, FileHooks, migrations } from '@/stores/files'
 
 export default function Provider({ children }: { children: ReactNode }) {
   const clientDescriptor = new ClientDescriptor({
@@ -10,5 +10,5 @@ export default function Provider({ children }: { children: ReactNode }) {
     namespace: 'files'
   })
 
-  return <Store.Provider value={clientDescriptor}>{children}</Store.Provider>
+  return <FileHooks.Provider value={clientDescriptor}>{children}</FileHooks.Provider>
 }

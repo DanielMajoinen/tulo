@@ -1,7 +1,7 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 import { useSession } from 'next-auth/react'
 
-import InputHooks from '@/stores/inputs'
+import { InputHooks } from '@/stores/inputs'
 
 export function useAllUserInputsByType() {
   const { data } = useSession()

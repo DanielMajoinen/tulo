@@ -1,7 +1,7 @@
 import { parse as papaParse } from 'papaparse'
 import { type ChangeEvent, useEffect, useState } from 'react'
 
-import FileHooks from '@/stores/files'
+import { FileHooks } from '@/stores/files'
 import { type File, type FileDestructured } from '@/stores/files/client'
 
 type CsvParseOptions = { type: 'csv'; header: boolean }

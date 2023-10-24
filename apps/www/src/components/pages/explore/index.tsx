@@ -1,11 +1,15 @@
-import BoardCard from '@/components/pages/explore/BoardCard'
-import ExploreContent from '@/components/pages/explore/ExploreContent'
-import { api } from '@/utils/api'
+import { useAllBoards } from '@/boards'
 
-export { BoardCard, ExploreContent }
+import BoardCard from './BoardCard'
 
 export default function Explore() {
-  const boards = api.boards.all.useQuery(undefined, { staleTime: 60000 }) // Refresh every minute
+  const boards = useAllBoards()
 
-  return <>{boards.data && <ExploreContent boards={boards.data} />}</>
+  return (
+    <div className="flex flex-wrap gap-5">
+      {boards.map((board) => (
+        <BoardCard key={board.id} {...board} />
+      ))}
+    </div>
+  )
 }

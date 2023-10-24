@@ -6,8 +6,8 @@ import { Suspense } from 'react'
 
 import { DashboardLayout, ExploreLayout } from '@/components/layouts'
 import Board from '@/components/pages/board'
-import Create from '@/components/pages/create'
 import Explore from '@/components/pages/explore'
+import ExploreBoard from '@/components/pages/explore/ExploreBoard'
 import { BoardsProvider, FilesProvider, InputsProvider } from '@/components/providers'
 
 export function SPA() {
@@ -22,7 +22,7 @@ export function SPA() {
         },
         {
           path: ':id',
-          component: Create
+          component: ExploreBoard
         }
       ]
     },
