@@ -4,7 +4,7 @@ import { Outlet, TransitionIndicator } from '@verdant-web/react-router'
 import { X } from 'lucide-react'
 import { useRouter } from 'next/router'
 
-import { Icons } from '@/components/icons'
+import { Icons } from '@/components/Icons'
 
 export default function ExploreLayout() {
   const router = useRouter()

@@ -2,7 +2,7 @@
 
 import { Outlet, TransitionIndicator } from '@verdant-web/react-router'
 
-import { Icons } from '@/components/icons'
+import { Icons } from '@/components/Icons'
 import { DashboardHeader, DashboardSidebar } from '@/components/layouts/dashboard'
 
 export default function DashboardLayout() {

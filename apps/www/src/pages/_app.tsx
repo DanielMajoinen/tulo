@@ -6,7 +6,7 @@ import { type Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
 import { AxiomWebVitals } from 'next-axiom'
 
-import { ThemeProvider } from '@/components/providers/ThemeProvider'
+import { ThemeProvider } from '@/components/ThemeProvider'
 import { trpc } from '@/utils/trpc'
 
 const Tulo: AppType<{ session: Session | null }> = ({ Component, pageProps: { session, ...pageProps } }) => {

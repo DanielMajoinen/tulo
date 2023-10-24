@@ -1,4 +1,4 @@
-import CurrencySelect from './currency-select/CurrencySelect'
-import TableInput from './table/TableInput'
+import CurrencySelect from './CurrencySelect/CurrencySelect'
+import TableInput from './TableInput/TableInput'
 
 export { CurrencySelect, TableInput }

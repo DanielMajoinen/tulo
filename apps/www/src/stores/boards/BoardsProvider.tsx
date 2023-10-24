@@ -2,7 +2,9 @@
 
 import { type ReactNode } from 'react'
 
-import { BoardHooks, ClientDescriptor, migrations } from '@/stores/boards'
+import { ClientDescriptor } from './client'
+import BoardHooks from './hooks'
+import migrations from './migrations'
 
 export default function Provider({ children }: { children: ReactNode }) {
   const clientDescriptor = new ClientDescriptor({

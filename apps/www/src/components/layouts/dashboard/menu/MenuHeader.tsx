@@ -2,7 +2,7 @@
 
 import { Link } from '@verdant-web/react-router'
 
-import { Icons } from '@/components/icons'
+import { Icons } from '@/components/Icons'
 import { Button } from '@/components/ui/button'
 
 type MenuHeaderProps = {

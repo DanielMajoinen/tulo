@@ -2,7 +2,7 @@
 
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
 
-import { Icons } from '@/components/icons'
+import { Icons } from '@/components/Icons'
 import { MenuHeader, MenuSheet } from '@/components/layouts/dashboard/menu'
 
 type DashboardHeaderProps = {

@@ -1,7 +1,7 @@
 import { Save } from 'lucide-react'
 import { useState } from 'react'
 
-import { Icons } from '@/components/icons'
+import { Icons } from '@/components/Icons'
 import { CreateBoardConfirmationDialog } from '@/components/pages/create'
 import { useCreateBoardContext } from '@/components/providers'
 import { Button } from '@/components/ui/button'
