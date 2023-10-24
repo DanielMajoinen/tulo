@@ -1,5 +1,3 @@
-'use client'
-
 import { Outlet, TransitionIndicator } from '@verdant-web/react-router'
 import { X } from 'lucide-react'
 import { useRouter } from 'next/router'

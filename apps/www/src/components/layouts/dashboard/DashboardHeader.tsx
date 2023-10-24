@@ -1,5 +1,3 @@
-'use client'
-
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
 
 import { Icons } from '@/components/Icons'

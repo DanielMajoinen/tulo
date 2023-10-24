@@ -1,5 +1,3 @@
-'use client'
-
 import { User } from '@nextui-org/react'
 import { signOut, useSession } from 'next-auth/react'
 

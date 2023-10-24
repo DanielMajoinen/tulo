@@ -1,5 +1,3 @@
-'use client'
-
 import { MenuFooter, MenuHeader, MenuOptions } from '@/components/layouts/dashboard/menu'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'

@@ -1,5 +1,3 @@
-'use client'
-
 import { Link } from '@verdant-web/react-router'
 
 import { Icons } from '@/components/Icons'
