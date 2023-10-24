@@ -7,8 +7,10 @@ import { Suspense } from 'react'
 import { DashboardLayout, ExploreLayout } from '@/components/layouts'
 import Board from '@/components/pages/board'
 import Explore from '@/components/pages/explore'
-import ExploreBoard from '@/components/pages/explore/ExploreBoard'
-import { BoardsProvider, FilesProvider, InputsProvider } from '@/components/providers'
+import ExploreNewBoard from '@/components/pages/explore/ExploreNewBoard'
+import BoardsProvider from '@/stores/boards/BoardsProvider'
+import FilesProvider from '@/stores/files/FilesProvider'
+import InputsProvider from '@/stores/inputs/InputsProvider'
 
 export function SPA() {
   const routes = makeRoutes([
@@ -22,7 +24,7 @@ export function SPA() {
         },
         {
           path: ':id',
-          component: ExploreBoard
+          component: ExploreNewBoard
         }
       ]
     },

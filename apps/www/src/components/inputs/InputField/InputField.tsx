@@ -1,22 +1,21 @@
-import { type BoardInputDefinition } from '@/boards'
+import { type BoardInputDefinition, type BoardInputProperty } from '@/boards'
 import { CurrencySelect, TableInput } from '@/components/inputs'
 import { Input } from '@/components/ui/input'
-import { type DraftInputProperty } from '@/context'
 import { type Prettify } from '@/types'
 
-export type InputFieldProps = Prettify<
-  Prettify<Pick<BoardInputDefinition, 'name' | 'type'>> & {
-    value?: string
-    properties?: Record<string, DraftInputProperty>
-    onChange?: (
-      value: string,
-      options?: {
-        displayValue?: string
-      }
-    ) => void
-    onPropertyChange?: (property: string, value: string) => void
-  }
->
+export type InputFieldProps = Prettify<{
+  name: string
+  type: BoardInputDefinition['type']
+  properties?: Prettify<Record<string, Prettify<Omit<BoardInputProperty, 'id' | 'type'> & { value?: string }>>>
+  value?: string
+  onChange?: (
+    value: string,
+    options?: {
+      displayValue?: string
+    }
+  ) => void
+  onPropertyChange?: (property: string, value: string) => void
+}>
 
 export default function InputField(props: InputFieldProps) {
   return (

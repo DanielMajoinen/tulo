@@ -8,6 +8,8 @@ export type BoardInputColumnDefinition = {
   validator?: Validator
 }
 
+export type BoardInputProperty = BoardInputColumnDefinition
+
 export type BoardInputDefinition = {
   id: string
   name: string

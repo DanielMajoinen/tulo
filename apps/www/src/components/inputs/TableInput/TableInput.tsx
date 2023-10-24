@@ -1,6 +1,6 @@
 import { type ChangeEvent } from 'react'
 
-import { type InputFieldProps } from '@/components/pages/create/InputField'
+import { type InputFieldProps } from '@/components/inputs/InputField/InputField'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
