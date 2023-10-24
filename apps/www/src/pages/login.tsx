@@ -8,7 +8,7 @@ import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
-import { api } from '@/utils/api'
+import { trpc } from '@/utils/trpc'
 
 type LoginProvidersProps = {
   providers: ClientSafeProvider[]
@@ -34,7 +34,7 @@ function LoginProviders({ providers }: LoginProvidersProps) {
 }
 
 export default function Login() {
-  const { data: providers } = api.loginProviders.all.useQuery()
+  const { data: providers } = trpc.loginProviders.all.useQuery()
   const session = useSession()
   const router = useRouter()
 

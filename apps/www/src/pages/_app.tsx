@@ -7,7 +7,7 @@ import { SessionProvider } from 'next-auth/react'
 import { AxiomWebVitals } from 'next-axiom'
 
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
-import { api } from '@/utils/api'
+import { trpc } from '@/utils/trpc'
 
 const Tulo: AppType<{ session: Session | null }> = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
@@ -21,4 +21,4 @@ const Tulo: AppType<{ session: Session | null }> = ({ Component, pageProps: { se
   )
 }
 
-export default api.withTRPC(Tulo)
+export default trpc.withTRPC(Tulo)
