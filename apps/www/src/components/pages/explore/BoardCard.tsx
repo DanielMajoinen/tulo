@@ -1,10 +1,10 @@
 import { useNavigate } from '@verdant-web/react-router'
 import { BadgeCheck } from 'lucide-react'
 
+import { type BoardDefinition } from '@/boards'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { type BoardDefinition } from '@/types'
 
 type BoardCardProps = BoardDefinition
 

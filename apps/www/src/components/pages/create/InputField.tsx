@@ -1,7 +1,8 @@
+import { type BoardInputDefinition } from '@/boards'
 import { CurrencySelect, TableInput } from '@/components/inputs'
 import { Input } from '@/components/ui/input'
-import { type DraftInputProperty } from '@/stores/boards/draft'
-import { type BoardInputDefinition, type Prettify } from '@/types'
+import { type DraftInputProperty } from '@/context'
+import { type Prettify } from '@/types'
 
 export type InputFieldProps = Prettify<
   Prettify<Pick<BoardInputDefinition, 'name' | 'type'>> & {
