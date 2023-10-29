@@ -9,14 +9,14 @@ import { Label } from '@/components/ui/label'
 
 type CreateBoardConfirmationDialogProps = {
   trigger: ReactNode
-  onSave?: () => void
+  onSave?: (boardName: string) => void
 }
 
 export default function CreateBoardConfirmationDialog({ trigger, onSave }: CreateBoardConfirmationDialogProps) {
   const [name, setName] = useState('')
 
   const onClick = () => {
-    onSave?.()
+    onSave?.(name)
   }
 
   return (

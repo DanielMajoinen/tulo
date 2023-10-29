@@ -76,12 +76,14 @@ function Inputs() {
 }
 
 function Preview() {
-  const saveBoard = useDraftBoardContext((state) => state.saveBoard)
+  const { saveBoard, setName } = useDraftBoardContext((state) => ({ saveBoard: state.saveBoard, setName: state.setName }))
   const [isSaving, setIsSaving] = useState(false)
   const navigate = useNavigate()
 
-  const onSave = () => {
+  const onSave = (name: string) => {
     setIsSaving(true)
+    setName(name)
+
     const id = saveBoard?.()
     id && navigate(`/board/${id}`)
   }
