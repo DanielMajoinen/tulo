@@ -14,9 +14,8 @@ export const createDraftBoardStore = ({ board }: DraftBoardProviderProps): Draft
     const saveBoard = useSaveBoard()
 
     const validate = () => {
-      const gottenState = get()
-      validateInputs(gottenState.inputs, (success) => {
-        success && store(set, (state) => (state.saveBoard = () => saveBoard(gottenState)))
+      validateInputs(get().inputs, (success) => {
+        success && store(set, (state) => (state.saveBoard = () => saveBoard(get())))
       })
     }
 
