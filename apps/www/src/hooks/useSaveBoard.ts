@@ -1,4 +1,5 @@
 import { useSession } from 'next-auth/react'
+import { v4 as uuid } from 'uuid'
 
 import { type DraftBoardStore } from '@/context'
 import { BoardHooks } from '@/stores/boards'
@@ -7,7 +8,7 @@ import { type Prettify } from '@/types'
 
 type UseSaveBoardProps = Prettify<Pick<DraftBoardStore, 'name' | 'inputs'>>
 
-export const useSaveBoard = (): (({ name, inputs }: UseSaveBoardProps) => void) => {
+export const useSaveBoard = (): (({ name, inputs }: UseSaveBoardProps) => string | undefined) => {
   const { data: session } = useSession()
 
   const { boards: boardsClient, batch: boardsBatchFactory } = BoardHooks.useClient()
@@ -18,6 +19,8 @@ export const useSaveBoard = (): (({ name, inputs }: UseSaveBoardProps) => void) 
 
   return ({ name, inputs }) => {
     try {
+      const id = uuid()
+
       inputsBatch.run(() => {
         Object.values(inputs).map((input) =>
           inputsClient.put({
@@ -32,6 +35,7 @@ export const useSaveBoard = (): (({ name, inputs }: UseSaveBoardProps) => void) 
 
       boardsBatch.run(() => {
         boardsClient.put({
+          id,
           inputs: Object.entries(inputs).map(([id, input]) => ({
             id,
             properties: Object.entries(input.properties ?? {}).map(([id, { value }]) => ({ id, value }))
@@ -43,9 +47,12 @@ export const useSaveBoard = (): (({ name, inputs }: UseSaveBoardProps) => void) 
 
       boardsBatch.flush()
       inputsBatch.flush()
+
+      return id
     } catch (error) {
       boardsBatch.discard()
       inputsBatch.discard()
+      return undefined
     }
   }
 }

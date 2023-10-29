@@ -22,7 +22,7 @@ export type DraftInput = Prettify<
 export type DraftBoardStore = {
   name: string
   inputs: Record<string, DraftInput>
-  saveBoard: (() => void) | null
+  saveBoard: (() => string | undefined) | null
   setName: (name: string) => void
   setInputValue: (id: string, value: string) => void
   setInputPropertyValue: (id: string, property: string, value: string) => void

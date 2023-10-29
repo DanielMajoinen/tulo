@@ -22,37 +22,22 @@ export default function ExploreNewBoard() {
   const board = useBoard(params.id as BoardId)
   return board ? (
     <DraftBoardProvider board={board}>
-      <ExploreNewBoardTabs />
+      <Component />
     </DraftBoardProvider>
   ) : null
 }
 
-function ExploreNewBoardTabs() {
-  const saveBoard = useDraftBoardContext((state) => state.saveBoard)
-
+function Component() {
   return (
     <Tabs className="w-full" defaultValue="inputs">
-      {/* Inputs */}
-      <ExploreNewBoardInputTabContents />
-      {/* Preview */}
-      <ExploreNewBoardPreviewTabContents />
-      {/* Tabs */}
-      <TabsList className="fixed bottom-5 right-5 min-w-[220px] items-center">
-        <TabsTrigger value="inputs" className="flex gap-2">
-          <Cable />
-          <span>Inputs</span>
-        </TabsTrigger>
-        <TabsTrigger value="preview" className="flex gap-2" disabled={saveBoard === null}>
-          {/* eslint-disable-next-line jsx-a11y/alt-text */}
-          <Image />
-          <span>Preview</span>
-        </TabsTrigger>
-      </TabsList>
+      <Inputs />
+      <Preview />
+      <TabSelection />
     </Tabs>
   )
 }
 
-function ExploreNewBoardInputTabContents() {
+function Inputs() {
   const { inputs, setInputPropertyValue, setInputValue } = useDraftBoardContext((state) => state)
 
   return (
@@ -90,11 +75,15 @@ function ExploreNewBoardInputTabContents() {
   )
 }
 
-function ExploreNewBoardPreviewTabContents() {
+function Preview() {
   const saveBoard = useDraftBoardContext((state) => state.saveBoard)
   const [isSaving, setIsSaving] = useState(false)
+  const navigate = useNavigate()
+
   const onSave = () => {
     setIsSaving(true)
+    const id = saveBoard?.()
+    id && navigate(`/board/${id}`)
   }
 
   return (
@@ -121,5 +110,23 @@ function ExploreNewBoardPreviewTabContents() {
         }
       />
     </TabsContent>
+  )
+}
+
+function TabSelection() {
+  const saveBoard = useDraftBoardContext((state) => state.saveBoard)
+
+  return (
+    <TabsList className="fixed bottom-5 right-5 min-w-[220px] items-center">
+      <TabsTrigger value="inputs" className="flex gap-2">
+        <Cable />
+        <span>Inputs</span>
+      </TabsTrigger>
+      <TabsTrigger value="preview" className="flex gap-2" disabled={saveBoard === null}>
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
+        <Image />
+        <span>Preview</span>
+      </TabsTrigger>
+    </TabsList>
   )
 }
