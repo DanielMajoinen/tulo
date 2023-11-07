@@ -1,12 +1,12 @@
 import { useNavigate } from '@verdant-web/react-router'
 import { BadgeCheck } from 'lucide-react'
 
-import { type BoardDefinition } from '@/boards'
+import { type BoardTemplate } from '@/boards'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-type BoardCardProps = BoardDefinition
+type BoardCardProps = BoardTemplate
 
 export default function BoardCard(props: BoardCardProps) {
   const { id, name, owner, description, tags } = props

@@ -1,17 +1,7 @@
-import type {
-  AccessibleEntityProperty,
-  AnyEntity,
-  Entity,
-  EntityDestructured,
-  EntityFile,
-  EntityShape,
-  ListEntity,
-  ObjectEntity,
-  UserInfo
-} from '@verdant-web/store'
+import type { AnyEntity, EntityDestructured, EntityFile, EntityShape, UserInfo } from '@verdant-web/store'
 import { type ComponentType, type Context, type ReactNode } from 'react'
 
-import type { Client, ClientDescriptor, File, FileFilter, QueryStatus, Schema } from './index'
+import type { Client, ClientDescriptor, Document, DocumentFilter, QueryStatus, Schema } from './index'
 
 type HookConfig<F> = {
   index?: F
@@ -63,21 +53,21 @@ export interface GeneratedHooks<Presence, Profile> {
    */
   useSync(isOn: boolean): void
 
-  useFile(id: string, config?: { skip?: boolean }): File | null
-  useFileUnsuspended(id: string, config?: { skip?: boolean }): { data: File | null; status: QueryStatus }
-  useOneFile: <Config extends HookConfig<FileFilter>>(config?: Config) => File | null
-  useOneFilesUnsuspended: <Config extends HookConfig<FileFilter>>(config?: Config) => { data: File | null; status: QueryStatus }
-  useAllFiles: <Config extends HookConfig<FileFilter>>(config?: Config) => File[]
-  useAllFilesUnsuspended: <Config extends HookConfig<FileFilter>>(config?: Config) => { data: File[]; status: QueryStatus }
-  useAllFilesPaginated: <
-    Config extends HookConfig<FileFilter> & {
+  useDocument(id: string, config?: { skip?: boolean }): Document | null
+  useDocumentUnsuspended(id: string, config?: { skip?: boolean }): { data: Document | null; status: QueryStatus }
+  useOneDocument: <Config extends HookConfig<DocumentFilter>>(config?: Config) => Document | null
+  useOneDocumentsUnsuspended: <Config extends HookConfig<DocumentFilter>>(config?: Config) => { data: Document | null; status: QueryStatus }
+  useAllDocuments: <Config extends HookConfig<DocumentFilter>>(config?: Config) => Document[]
+  useAllDocumentsUnsuspended: <Config extends HookConfig<DocumentFilter>>(config?: Config) => { data: Document[]; status: QueryStatus }
+  useAllDocumentsPaginated: <
+    Config extends HookConfig<DocumentFilter> & {
       pageSize?: number
       suspend?: false
     }
   >(
     config?: Config
   ) => [
-    File[],
+    Document[],
     {
       next: () => void
       previous: () => void
@@ -87,18 +77,18 @@ export interface GeneratedHooks<Presence, Profile> {
       status: QueryStatus
     }
   ]
-  useAllFilesInfinite: <
-    Config extends HookConfig<FileFilter> & {
+  useAllDocumentsInfinite: <
+    Config extends HookConfig<DocumentFilter> & {
       pageSize?: number
       suspend?: false
     }
   >(
     config?: Config
-  ) => [File[], { loadMore: () => void; hasMore: boolean; status: QueryStatus }]
+  ) => [Document[], { loadMore: () => void; hasMore: boolean; status: QueryStatus }]
 }
 
 type HookName = `use${string}`
-type HookWithoutClient<Hook extends <TArgs extends any[], TRet>(client: Client, ...args: Targs) => TRet> = (...args: TArgs) => TRet
+type HookWithoutClient<Hook extends <TRet>(client: Client) => TRet> = () => ReturnType<Hook>
 export function createHooks<
   Presence = any,
   Profile = any,

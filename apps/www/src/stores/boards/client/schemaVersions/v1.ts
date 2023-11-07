@@ -11,6 +11,11 @@ const boards = collection({
       type: 'string',
       unique: true
     },
+    templateId: {
+      indexed: false,
+      type: 'string',
+      unique: false
+    },
     userId: {
       indexed: true,
       type: 'string',

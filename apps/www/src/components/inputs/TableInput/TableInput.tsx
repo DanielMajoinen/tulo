@@ -5,12 +5,14 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { useFile } from '@/hooks'
+import { useDocument, useSaveDocument } from '@/hooks'
 
 type TableInputProps = Omit<InputFieldProps, 'type'>
 
 export default function TableInput({ value: id, name: inputName, properties, onChange, onPropertyChange }: TableInputProps) {
-  const { data, name, storeFile, headers, getExample } = useFile({ id, parse: { header: true, type: 'csv' } })
+  const { data, name, headers, getExample } = useDocument({ id, parse: { header: true, type: 'csv' } })
+
+  const saveDocument = useSaveDocument()
 
   /**
    * Click the hidden file input to open the file selection dialog.
@@ -21,7 +23,7 @@ export default function TableInput({ value: id, name: inputName, properties, onC
    * Store the file and call the onChange callback.
    */
   const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    storeFile(event, (file) => onChange?.(file.id, { displayValue: file.filename }))
+    saveDocument(event, (document) => onChange?.(document.id, { displayValue: document.filename }))
     // Reset properties
     Object.keys(properties ?? {}).forEach((id) => onPropertyChange?.(id, ''))
   }

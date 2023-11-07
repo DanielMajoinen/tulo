@@ -2,7 +2,7 @@ import { useNavigate, useParams } from '@verdant-web/react-router'
 import { Cable, Image, Save } from 'lucide-react'
 import { useState } from 'react'
 
-import { type BoardId, useBoard } from '@/boards'
+import { Templates } from '@/boards'
 import { Icons } from '@/components/Icons'
 import { InputField } from '@/components/inputs'
 import { Button } from '@/components/ui/button'
@@ -12,14 +12,14 @@ import { DraftBoardProvider, useDraftBoardContext } from '@/context'
 
 import CreateBoardConfirmationDialog from './CreateBoardConfirmationDialog'
 
-export default function ExploreNewBoard() {
+export default function ExploreTemplate() {
   const params = useParams()
   const router = useNavigate()
   if (!params.id) {
     router('/explore')
   }
 
-  const board = useBoard(params.id as BoardId)
+  const board = Templates.get.board({ id: params.id! })
   return board ? (
     <DraftBoardProvider board={board}>
       <Component />

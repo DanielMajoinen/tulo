@@ -6,7 +6,11 @@ import { BoardHooks } from '@/stores/boards'
 import { InputHooks } from '@/stores/inputs'
 import { type Prettify } from '@/types'
 
-type UseSaveBoardProps = Prettify<Pick<DraftBoardStore, 'name' | 'inputs'>>
+type UseSaveBoardProps = Prettify<
+  Pick<DraftBoardStore, 'name' | 'inputs'> & {
+    templateId: string
+  }
+>
 
 export const useSaveBoard = (): (({ name, inputs }: UseSaveBoardProps) => string | undefined) => {
   const { data: session } = useSession()
@@ -17,14 +21,13 @@ export const useSaveBoard = (): (({ name, inputs }: UseSaveBoardProps) => string
   const boardsBatch = boardsBatchFactory({ undoable: true })
   const inputsBatch = inputsBatchFactory({ undoable: true })
 
-  return ({ name, inputs }) => {
+  return ({ templateId, name, inputs }) => {
     try {
       const id = uuid()
 
       inputsBatch.run(() => {
         Object.values(inputs).map((input) =>
           inputsClient.put({
-            // TODO: displayValue
             name: input.name,
             type: input.type,
             userId: session?.user?.id ?? '',
@@ -41,6 +44,7 @@ export const useSaveBoard = (): (({ name, inputs }: UseSaveBoardProps) => string
             properties: Object.entries(input.properties ?? {}).map(([id, { value }]) => ({ id, value }))
           })),
           name,
+          templateId,
           userId: session?.user?.id ?? ''
         })
       })
@@ -52,6 +56,7 @@ export const useSaveBoard = (): (({ name, inputs }: UseSaveBoardProps) => string
     } catch (error) {
       boardsBatch.discard()
       inputsBatch.discard()
+
       return undefined
     }
   }

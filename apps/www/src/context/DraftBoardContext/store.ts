@@ -1,6 +1,6 @@
 import { createStore } from 'zustand'
 
-import { useSaveBoard } from '@/hooks/useSaveBoard'
+import { useSaveBoard } from '@/hooks'
 import { store } from '@/utils/store'
 
 import { type DraftBoardProviderProps, type DraftBoardStore, type DraftBoardStoreApi, type DraftValue } from './types'
@@ -15,7 +15,7 @@ export const createDraftBoardStore = ({ board }: DraftBoardProviderProps): Draft
 
     const validate = () => {
       validateInputs(get().inputs, (success) => {
-        success && store(set, (state) => (state.saveBoard = () => saveBoard(get())))
+        success && store(set, (state) => (state.saveBoard = () => saveBoard({ ...get(), templateId: board.id })))
       })
     }
 
@@ -36,7 +36,7 @@ export const createDraftBoardStore = ({ board }: DraftBoardProviderProps): Draft
     return {
       inputs,
       name: board.name,
-      saveBoard: isValid ? () => saveBoard(get()) : null,
+      saveBoard: isValid ? () => saveBoard({ ...get(), templateId: board.id }) : null,
       setInputPropertyValue: (id, property, value) => setAndValidate((state) => state.inputs[id]?.properties[property], value),
       setInputValue: (id, value) => setAndValidate((state) => state.inputs[id], value),
       setName: (name) => store(set, (state) => void (state.name = name))

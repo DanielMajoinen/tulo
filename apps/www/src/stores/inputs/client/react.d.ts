@@ -89,7 +89,7 @@ export interface GeneratedHooks<Presence, Profile> {
 
 type HookName = `use${string}`
 type HookWithoutClient<Hook extends <TArgs extends any[], TRet>(client: Client, ...args: TArgs) => TRet> = (
-  ...args: any[]
+  ...args: Parameters<Hook>
 ) => ReturnType<Hook>
 export function createHooks<
   Presence = any,

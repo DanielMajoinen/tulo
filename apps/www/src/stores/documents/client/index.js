@@ -1,4 +1,4 @@
-import schema from "./schema.js";
+import schema from "./schema";
 import { Storage, StorageDescriptor } from "@verdant-web/store";
 export * from "@verdant-web/store";
 

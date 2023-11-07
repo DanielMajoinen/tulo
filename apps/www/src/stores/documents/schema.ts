@@ -2,7 +2,7 @@
 import { collection, schema } from '@verdant-web/store'
 import { v4 as uuid } from 'uuid'
 
-const files = collection({
+const documents = collection({
   compounds: {},
   fields: {
     id: {
@@ -28,14 +28,14 @@ const files = collection({
       unique: false
     }
   },
-  name: 'file',
+  name: 'document',
   primaryKey: 'id',
   synthetics: {}
 })
 
 export default schema({
   collections: {
-    files: files
+    documents: documents
   },
   version: 1
 })

@@ -1,4 +1,4 @@
-import { type InputFieldProps } from '@/components/pages/create/InputField'
+import { type InputFieldProps } from '@/components/inputs'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 const currencies: Record<string, { symbol: string; name: string; code: string }> = {

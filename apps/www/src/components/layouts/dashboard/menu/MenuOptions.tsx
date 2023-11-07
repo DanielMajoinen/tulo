@@ -35,11 +35,11 @@ export default function MenuOptions({ activePageName }: MenuOptionsProps) {
   const options: MenuOptionProps[] = boards
     .map(({ id, name }) => ({
       name,
-      url: `/boards/${id}`
+      url: `/board/${id}`
     }))
     .sort((a, b) => a.name.localeCompare(b.name))
 
-  return options.map(({ name, url, ...props }) => (
-    <MenuOption key={name} name={name} isActive={activePageName?.toLowerCase() === name.toLowerCase()} url={url} {...props} />
+  return options.map(({ name, url, ...props }, i) => (
+    <MenuOption key={`menu-option-${i}`} name={name} isActive={activePageName?.toLowerCase() === name.toLowerCase()} url={url} {...props} />
   ))
 }

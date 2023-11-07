@@ -1,16 +1,15 @@
-import { useMatch, useParams } from '@verdant-web/react-router'
-import { useRouter } from 'next/router'
+import { useParams } from '@verdant-web/react-router'
 
-import { useBoard } from '@/hooks/useBoard'
+import { BoardProvider } from '@/context'
+
+import BoardContent from './BoardContent'
 
 export default function Board() {
-  const router = useRouter()
-  if (useMatch({ end: true, path: '/board' })) {
-    router.back()
-  }
-
   const params = useParams()
-  const board = useBoard({ id: params.id! })
 
-  return <p>{board.name}</p>
+  return params.id ? (
+    <BoardProvider boardId={params.id}>
+      <BoardContent />
+    </BoardProvider>
+  ) : null
 }

@@ -1,1 +1,1 @@
-export { TransactionHistoryBoard } from './board'
+export { TransactionHistoryBoardTemplate } from './template'

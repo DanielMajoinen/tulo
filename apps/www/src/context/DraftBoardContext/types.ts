@@ -1,7 +1,7 @@
 import { type z } from 'zod'
 import { type StoreApi } from 'zustand'
 
-import { type BoardDefinition, type BoardInputColumnDefinition, type BoardInputDefinition } from '@/boards'
+import { type BoardTemplate, type InputTemplate, type PropertyTemplate } from '@/boards'
 import { type Prettify, type Validator } from '@/types'
 
 export type DraftValue = {
@@ -10,12 +10,12 @@ export type DraftValue = {
   validator?: Validator
 }
 
-export type DraftInputProperty = Prettify<Prettify<Pick<BoardInputColumnDefinition, 'description' | 'name' | 'type'>> & DraftValue>
+export type DraftProperty = Prettify<Prettify<Pick<PropertyTemplate, 'description' | 'name' | 'type'>> & DraftValue>
 
 export type DraftInput = Prettify<
-  Prettify<Pick<BoardInputDefinition, 'description' | 'name' | 'type'>> &
+  Prettify<Pick<InputTemplate, 'description' | 'name' | 'type'>> &
     DraftValue & {
-      properties: Record<string, DraftInputProperty>
+      properties: Record<string, DraftProperty>
     }
 >
 
@@ -30,4 +30,4 @@ export type DraftBoardStore = {
 
 export type DraftBoardStoreApi = StoreApi<DraftBoardStore>
 
-export type DraftBoardProviderProps = { board: BoardDefinition }
+export type DraftBoardProviderProps = { board: BoardTemplate }

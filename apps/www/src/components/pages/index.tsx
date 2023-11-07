@@ -5,11 +5,12 @@ import { makeRoutes, Outlet, Router } from '@verdant-web/react-router'
 import { Suspense } from 'react'
 
 import { DashboardLayout, ExploreLayout } from '@/components/layouts'
+import NotFound from '@/components/pages/404'
 import Board from '@/components/pages/board'
 import Explore from '@/components/pages/explore'
-import ExploreNewBoard from '@/components/pages/explore/ExploreNewBoard'
+import ExploreTemplate from '@/components/pages/explore/ExploreTemplate'
 import BoardsProvider from '@/stores/boards/BoardsProvider'
-import FilesProvider from '@/stores/files/FilesProvider'
+import DocumentsProvider from '@/stores/documents/DocumentsProvider'
 import InputsProvider from '@/stores/inputs/InputsProvider'
 
 export function SPA() {
@@ -24,25 +25,29 @@ export function SPA() {
         },
         {
           path: ':id',
-          component: ExploreNewBoard
+          component: ExploreTemplate
         }
       ]
     },
     {
-      path: '/', // Redirected by middleware to users first board, or the explore page if they have no boards
+      path: '/',
       component: DashboardLayout,
       children: [
         {
+          index: true,
+          component: NotFound
+        },
+        {
           component: Board,
-          path: '/board', // Redirected by middleware to users first board
+          path: '/board',
           children: [
             {
+              index: true,
+              component: NotFound
+            },
+            {
               path: ':id',
-              component: Board,
-              onVisited: async ({ id }) => {
-                // TODO: Retrieve board from param
-                console.log(id)
-              }
+              component: Board
             }
           ]
         }
@@ -56,9 +61,9 @@ export function SPA() {
         <Suspense>
           <BoardsProvider>
             <InputsProvider>
-              <FilesProvider>
+              <DocumentsProvider>
                 <Outlet />
-              </FilesProvider>
+              </DocumentsProvider>
             </InputsProvider>
           </BoardsProvider>
         </Suspense>

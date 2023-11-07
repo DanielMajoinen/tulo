@@ -1,35 +1,25 @@
 import { type Validator } from '@/types'
 
-export type BoardInputColumnDefinition = {
-  id: string
+export type PropertyTemplate = {
   name: string
   description: string
   type: 'text' | 'number' | 'currency'
   validator?: Validator
 }
 
-export type BoardInputProperty = BoardInputColumnDefinition
-
-export type BoardInputDefinition = {
-  id: string
+export type InputTemplate = {
   name: string
   description: string
+  type: 'text' | 'number' | 'currency' | 'currency-select' | 'table'
+  properties?: Record<string, PropertyTemplate>
   validator?: Validator
-} & (
-  | {
-      type: 'text' | 'number' | 'currency' | 'currency-select'
-    }
-  | {
-      type: 'table'
-      properties: BoardInputColumnDefinition[]
-    }
-)
+}
 
-export type BoardDefinition = {
+export type BoardTemplate = {
   id: string
   name: string
   description: string
   owner: string
-  inputs: BoardInputDefinition[]
+  inputs: Record<string, InputTemplate>
   tags?: string[]
 }

@@ -11,10 +11,9 @@ import type {
 
 import type schema from './schema'
 
-export * from '@verdant-web/store'
 export type Schema = typeof schema
 
-interface Collection<Document extends ObjectEntity<any, any>, Snapshot, Init, Filter> {
+interface Collection<Document extends ObjectEntity<any, any>, Init, Filter> {
   put: (init: Init, options?: { undoable?: boolean }) => Promise<Document>
   delete: (id: string, options?: { undoable?: boolean }) => Promise<void>
   deleteAll: (ids: string[], options?: { undoable?: boolean }) => Promise<void>
@@ -120,18 +119,21 @@ export type BoardFilter =
 
 export type BoardDestructured = {
   id: string
+  templateId: string
   userId: string
   name: string
   inputs: BoardInputs
 }
 export type BoardInit = {
   id?: string
+  templateId: string
   userId: string
   name: string
   inputs?: BoardInputsInit
 }
 export type BoardSnapshot = {
   id: string
+  templateId: string
   userId: string
   name: string
   inputs: BoardInputsSnapshot
@@ -142,6 +144,10 @@ export type BoardId = string
 export type BoardIdInit = BoardId | undefined
 export type BoardIdSnapshot = BoardId
 export type BoardIdDestructured = BoardId
+export type BoardTemplateId = string
+export type BoardTemplateIdInit = BoardTemplateId
+export type BoardTemplateIdSnapshot = BoardTemplateId
+export type BoardTemplateIdDestructured = BoardTemplateId
 export type BoardUserId = string
 export type BoardUserIdInit = BoardUserId
 export type BoardUserIdSnapshot = BoardUserId

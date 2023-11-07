@@ -1,4 +1,4 @@
-import { type BoardInputDefinition } from '@/boards'
+import { type InputTemplate } from '@/boards'
 import { type Validator } from '@/types'
 
 import { type DraftInput } from './types'
@@ -8,32 +8,25 @@ export const resolveValidationError = (validator?: Validator, value = '') => {
   return validation?.success ? null : validation?.error ?? null
 }
 
-export const createDraftInputs = (inputs: BoardInputDefinition[]): Record<string, DraftInput> =>
+export const createDraftInputs = (inputs: Record<string, InputTemplate>): Record<string, DraftInput> =>
   Object.fromEntries(
-    inputs.map((definition) => [
-      definition.id,
+    Object.entries(inputs).map(([id, { properties, validator, ...input }]) => [
+      id,
       {
-        description: definition.description,
-        error: resolveValidationError(definition.validator),
-        name: definition.name,
-        properties:
-          'properties' in definition
-            ? Object.fromEntries(
-                definition.properties.map((property) => [
-                  property.id,
-                  {
-                    description: property.description,
-                    error: resolveValidationError(property.validator),
-                    name: property.name,
-                    type: property.type,
-                    validator: property.validator,
-                    value: ''
-                  }
-                ])
-              )
-            : {},
-        type: definition.type,
-        validator: definition.validator,
+        ...input,
+        error: resolveValidationError(validator),
+        properties: Object.fromEntries(
+          Object.entries(properties ?? {}).map(([id, { validator, ...property }]) => [
+            id,
+            {
+              ...property,
+              error: resolveValidationError(validator),
+              validator,
+              value: ''
+            }
+          ])
+        ),
+        validator,
         value: ''
       }
     ])

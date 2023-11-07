@@ -1,5 +1,6 @@
-import v1Schema from '../client/schemaVersions/v1'
 import { migrate } from '@verdant-web/store'
+
+import v1Schema from '../client/schemaVersions/v1'
 
 // this is your first migration, so no logic is necessary!
 export default migrate(v1Schema, async ({ mutations }) => {

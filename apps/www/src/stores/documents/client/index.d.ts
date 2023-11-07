@@ -4,7 +4,6 @@ import type {
   ClientDescriptorOptions as StorageInitOptions,
   CollectionQueries,
   EntityFile,
-  ListEntity,
   ObjectEntity,
   Query,
   ServerSync
@@ -12,10 +11,9 @@ import type {
 
 import type schema from './schema'
 
-export * from '@verdant-web/store'
 export type Schema = typeof schema
 
-interface Collection<Document extends ObjectEntity<any, any>, Snapshot, Init, Filter> {
+interface Collection<Document extends ObjectEntity<any, any>, Init, Filter> {
   put: (init: Init, options?: { undoable?: boolean }) => Promise<Document>
   delete: (id: string, options?: { undoable?: boolean }) => Promise<void>
   deleteAll: (ids: string[], options?: { undoable?: boolean }) => Promise<void>
@@ -27,7 +25,7 @@ interface Collection<Document extends ObjectEntity<any, any>, Snapshot, Init, Fi
 }
 
 export class Client<Presence = any, Profile = any> {
-  readonly files: CollectionQueries<File, FileInit, FileFilter>
+  readonly documents: CollectionQueries<Document, DocumentInit, DocumentFilter>
 
   sync: ServerSync<Profile, Presence>
   undoHistory: Storage['undoHistory']
@@ -68,15 +66,15 @@ export class ClientDescriptor<Presence = any, Profile = any> {
   readonly namespace: string
   close: () => Promise<void>
 }
-export type File = ObjectEntity<FileInit, FileDestructured, FileSnapshot>
+export type Document = ObjectEntity<DocumentInit, DocumentDestructured, DocumentSnapshot>
 
-export interface FileIdMatchFilter {
+export interface DocumentIdMatchFilter {
   where: 'id'
   equals: string
   order?: 'asc' | 'desc'
 }
 
-export interface FileIdRangeFilter {
+export interface DocumentIdRangeFilter {
   where: 'id'
   gte?: string
   gt?: string
@@ -85,19 +83,19 @@ export interface FileIdRangeFilter {
   order?: 'asc' | 'desc'
 }
 
-export interface FileIdStartsWithFilter {
+export interface DocumentIdStartsWithFilter {
   where: 'id'
   startsWith: string
   order?: 'asc' | 'desc'
 }
 
-export interface FileUserIdMatchFilter {
+export interface DocumentUserIdMatchFilter {
   where: 'userId'
   equals: string
   order?: 'asc' | 'desc'
 }
 
-export interface FileUserIdRangeFilter {
+export interface DocumentUserIdRangeFilter {
   where: 'userId'
   gte?: string
   gt?: string
@@ -106,52 +104,52 @@ export interface FileUserIdRangeFilter {
   order?: 'asc' | 'desc'
 }
 
-export interface FileUserIdStartsWithFilter {
+export interface DocumentUserIdStartsWithFilter {
   where: 'userId'
   startsWith: string
   order?: 'asc' | 'desc'
 }
-export type FileFilter =
-  | FileIdMatchFilter
-  | FileIdRangeFilter
-  | FileIdStartsWithFilter
-  | FileUserIdMatchFilter
-  | FileUserIdRangeFilter
-  | FileUserIdStartsWithFilter
+export type DocumentFilter =
+  | DocumentIdMatchFilter
+  | DocumentIdRangeFilter
+  | DocumentIdStartsWithFilter
+  | DocumentUserIdMatchFilter
+  | DocumentUserIdRangeFilter
+  | DocumentUserIdStartsWithFilter
 
-export type FileDestructured = {
+export type DocumentDestructured = {
   id: string
   userId: string
   filename: string
-  file: FileFile
+  file: DocumentFile
 }
-export type FileInit = {
+export type DocumentInit = {
   id?: string
   userId: string
   filename: string
-  file?: FileFileInit
+  file?: DocumentFileInit
 }
-export type FileSnapshot = {
+export type DocumentSnapshot = {
   id: string
   userId: string
   filename: string
-  file: FileFileSnapshot
+  file: DocumentFileSnapshot
 }
-/** File sub-object types */
+/** Document sub-object types */
 
-export type FileId = string
-export type FileIdInit = FileId | undefined
-export type FileIdSnapshot = FileId
-export type FileIdDestructured = FileId
-export type FileUserId = string
-export type FileUserIdInit = FileUserId
-export type FileUserIdSnapshot = FileUserId
-export type FileUserIdDestructured = FileUserId
-export type FileFilename = string
-export type FileFilenameInit = FileFilename
-export type FileFilenameSnapshot = FileFilename
-export type FileFilenameDestructured = FileFilename
-export type FileFile = EntityFile
-export type FileFileInit = File
-export type FileFileDestructured = EntityFile
-export type FileFileSnapshot = string
+export type DocumentId = string
+export type DocumentIdInit = DocumentId | undefined
+export type DocumentIdSnapshot = DocumentId
+export type DocumentIdDestructured = DocumentId
+export type DocumentUserId = string
+export type DocumentUserIdInit = DocumentUserId
+export type DocumentUserIdSnapshot = DocumentUserId
+export type DocumentUserIdDestructured = DocumentUserId
+export type DocumentFilename = string
+export type DocumentFilenameInit = DocumentFilename
+export type DocumentFilenameSnapshot = DocumentFilename
+export type DocumentFilenameDestructured = DocumentFilename
+export type DocumentFile = EntityFile
+export type DocumentFileInit = File
+export type DocumentFileDestructured = EntityFile
+export type DocumentFileSnapshot = string
