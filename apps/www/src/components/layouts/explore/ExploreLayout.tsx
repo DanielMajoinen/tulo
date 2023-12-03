@@ -11,7 +11,7 @@ export default function ExploreLayout() {
     <div className="flex min-h-screen flex-col gap-5">
       <div className="mx-5 mt-5 flex items-center justify-center">
         <span className="flex-1">
-          <Icons.tulo className="h-10" color="#e66b6c" />
+          <Icons.tulo className="h-10" color="var(--tulo-primary)" />
         </span>
         <div className="flex-none hover:cursor-pointer" onClick={() => router.back()}>
           <X />
@@ -21,7 +21,7 @@ export default function ExploreLayout() {
         {/* Loading indicator */}
         <TransitionIndicator delay={300}>
           <div className="flex h-full w-full items-center justify-center">
-            <Icons.spinner className="h-16 w-16 animate-spin" color="#e66b6c" />
+            <Icons.spinner className="h-16 w-16 animate-spin" color="var(--tulo-primary)" />
           </div>
         </TransitionIndicator>
         <Outlet />

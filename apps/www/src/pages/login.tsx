@@ -49,7 +49,7 @@ export default function Login() {
       <div className="flex min-h-screen flex-col items-center justify-center">
         <Card>
           <CardHeader className="items-center space-y-1">
-            <Icons.tulo className="h-10" color="#e66b6c" />
+            <Icons.tulo className="h-10" color="var(--tulo-primary)" />
           </CardHeader>
           <CardContent className="grid gap-4">
             <Divider />

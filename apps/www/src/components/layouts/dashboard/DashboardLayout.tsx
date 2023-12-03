@@ -19,7 +19,7 @@ export default function DashboardLayout() {
           {/* Loading indicator */}
           <TransitionIndicator delay={300}>
             <div className="flex h-full w-full items-center justify-center">
-              <Icons.spinner className="h-16 w-16 animate-spin" color="#e66b6c" />
+              <Icons.spinner className="h-16 w-16 animate-spin" color="var(--tulo-primary)" />
             </div>
           </TransitionIndicator>
           {/* Child content */}

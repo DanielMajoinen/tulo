@@ -15,7 +15,7 @@ export default function DashboardHeader({ activePageName }: DashboardHeaderProps
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem>
-          <MenuSheet activePageName={activePageName} icon={<Icons.tulo className="h-10" color="#e66b6c" />} />
+          <MenuSheet activePageName={activePageName} icon={<Icons.tulo className="h-10" color="var(--tulo-primary)" />} />
         </NavbarItem>
       </NavbarContent>
     </Navbar>

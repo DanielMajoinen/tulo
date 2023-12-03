@@ -11,10 +11,10 @@ export default function MenuHeader({ activePageName }: MenuHeaderProps = {}) {
   const isExplorePage = activePageName?.toLowerCase() === 'explore'
   return (
     <div className="flex flex-none items-center justify-center gap-2 xl:flex-col xl:gap-5">
-      <Icons.tulo className="h-10" color="#e66b6c" />
+      <Icons.tulo className="h-10" color="var(--tulo-primary)" />
       {!isExplorePage && (
         <Link to="/explore">
-          <Button className={`rounded-full border-2 border-[#e66b6c] hover:bg-[#e66b6c]`} variant="outline">
+          <Button className={'rounded-full border-2 border-[var(--tulo-primary)] hover:bg-[var(--tulo-primary)]'} variant="outline">
             Explore
           </Button>
         </Link>

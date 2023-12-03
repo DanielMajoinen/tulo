@@ -13,7 +13,12 @@ type MenuOptionProps = {
 function MenuOption({ name, icon, url, isActive }: MenuOptionProps) {
   return url ? (
     <div className="flex w-full flex-col">
-      <Link to={url} className={`flex flex-none gap-3 px-5 py-3 hover:bg-[#e66b6c] hover:text-white ${isActive ? 'text-[#e66b6c]' : ''}`}>
+      <Link
+        to={url}
+        className={`flex flex-none gap-3 px-5 py-3 hover:bg-[var(--tulo-primary)] hover:text-white ${
+          isActive ? 'text-[var(--tulo-primary)]' : ''
+        }`}
+      >
         {icon ? icon : null}
         <span>{name}</span>
       </Link>
