@@ -6,7 +6,7 @@ import { type BoardTemplate } from '@/boards'
 export const TransactionHistoryBoardTemplate: BoardTemplate = {
   id: 'transaction-history',
   name: 'Transaction History',
-  description: "Track a bank account, credit card, cash, or investment and it's related transactions over time.",
+  description: 'Track a bank account, credit card, cash, or investments related transactions over time.',
   owner: 'Tulo',
   tags: ['Essentials'],
   inputs: {
